@@ -1,7 +1,9 @@
 import classes from "./navBar.module.scss";
+import btnClasses from "./navBarButtons.module.scss";
+import logoClasses from "./logo.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const NavButtons = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (link) => {
@@ -10,33 +12,49 @@ const NavBar = () => {
   };
 
   return (
-    <div className={classes.navBarStyle}>
-      <div className={classes.buttonsContainer}>
-        <div className={classes.buttonWrapper}>
-          <button
-            className={classes.buttonStyle}
-            onClick={() => handleNavigate("frontpage")}
-          >
-            Front page
-          </button>
-        </div>
-        <div className={classes.buttonWrapper}>
-          <button
-            className={classes.buttonStyle}
-            onClick={() => handleNavigate("store")}
-          >
-            Store
-          </button>
-        </div>
-        <div className={classes.buttonWrapper}>
-          <button
-            className={classes.buttonStyle}
-            onClick={() => handleNavigate("cart")}
-          >
-            Cart
-          </button>
-        </div>
+    <div className={btnClasses.container}>
+      <div className={btnClasses.wrapper}>
+        <button
+          className={btnClasses.style}
+          onClick={() => handleNavigate("frontpage")}
+        >
+          Front page
+        </button>
       </div>
+      <div className={btnClasses.wrapper}>
+        <button
+          className={btnClasses.style}
+          onClick={() => handleNavigate("store")}
+        >
+          Store
+        </button>
+      </div>
+      <div className={btnClasses.wrapper}>
+        <button
+          className={btnClasses.style}
+          onClick={() => handleNavigate("cart")}
+        >
+          Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const Logo = () => {
+  return (
+    <div className={logoClasses.container}>
+      <div className={logoClasses.wrapper}>
+        <h1>This is a Logo</h1>
+      </div>
+    </div>
+  );
+};
+
+const NavBar = () => {
+  return (
+    <div className={classes.container}>
+      <NavButtons />
     </div>
   );
 };

@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  justify-self: flex-end;
+
+  height: 100%;
+  min-width: 320px;
+  width: fit-content;
+
+  margin-right: 30px;
+}
+
+.wrapper {
+  background-color: rgba(0, 0, 0, 0.181);
+  width: fit-content;
+
+  min-width: 100px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 3px;
+}
+
+.wrapper:hover {
+  @extend .buttonHover;
+}
+
+.buttonHover {
+  background-color: rgba(0, 0, 0, 0.284);
+
+  border-radius: 5px;
+}
+
+.style {
+  color: black;
+}
