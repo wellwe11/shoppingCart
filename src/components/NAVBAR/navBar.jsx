@@ -7,8 +7,7 @@ const NavButtons = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (link) => {
-    // navigate(`profile/${link}`);
-    console.log("navigate to:", link);
+    navigate(`/${link}`);
   };
 
   return (
@@ -16,7 +15,7 @@ const NavButtons = () => {
       <div className={btnClasses.wrapper}>
         <button
           className={btnClasses.style}
-          onClick={() => handleNavigate("frontpage")}
+          onClick={() => handleNavigate("../")}
         >
           Front page
         </button>
@@ -24,7 +23,7 @@ const NavButtons = () => {
       <div className={btnClasses.wrapper}>
         <button
           className={btnClasses.style}
-          onClick={() => handleNavigate("store")}
+          onClick={() => handleNavigate("profile/store")}
         >
           Store
         </button>
@@ -32,7 +31,7 @@ const NavButtons = () => {
       <div className={btnClasses.wrapper}>
         <button
           className={btnClasses.style}
-          onClick={() => handleNavigate("cart")}
+          onClick={() => handleNavigate("profile/cart")}
         >
           Cart
         </button>
@@ -54,7 +53,10 @@ const Logo = () => {
 const NavBar = () => {
   return (
     <div className={classes.container}>
-      <NavButtons />
+      <div className={classes.wrapper}>
+        <Logo />
+        <NavButtons />
+      </div>
     </div>
   );
 };

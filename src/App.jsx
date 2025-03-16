@@ -1,12 +1,12 @@
 import "./App.css";
-import { Link } from "react-router-dom";
+
 import NavBar from "./components/NAVBAR/navBar";
+import Profile from "./components/PROFILEPAGE/Profile";
 
 function App() {
   return (
     <>
       <NavBar />
-      <Link to="Profile/asd">Click me!</Link>
     </>
   );
 }
