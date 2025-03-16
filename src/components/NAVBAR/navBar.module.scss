@@ -1,0 +1,33 @@
+.buttonHover {
+  background-color: black;
+}
+
+.navBarStyle {
+  height: 80px;
+  width: 100%;
+  background-color: #fdf7e3;
+}
+
+.buttonsContainer {
+  display: flex;
+}
+
+.buttonWrapper {
+  background-color: rgba(0, 0, 0, 0.181);
+  width: fit-content;
+
+  min-width: 100px;
+  margin: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonWrapper:hover {
+  @extend .buttonHover;
+}
+
+.buttonStyle {
+  color: black;
+}
