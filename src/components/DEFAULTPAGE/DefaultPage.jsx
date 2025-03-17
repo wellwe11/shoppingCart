@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./defaultPage.module.scss";
 import React from "react";
 
@@ -6,6 +6,7 @@ const PictureSlider = () => {
   const images = [{ img: "imgOne" }, { img: "imgTwo" }, { img: "imgThree" }];
 
   const [activeImage, setActiveImage] = useState(0);
+  const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
 
   const addActiveImage = () => {
     if (activeImage < images.length - 1) {
@@ -22,12 +23,35 @@ const PictureSlider = () => {
       setActiveImage(images.length - 1);
     }
   };
-  console.log(activeImage);
+
+  const handleMouseHoverSliderTrue = () => {
+    console.log(mouseHoverSlider);
+    setMouseHoverSlider(true);
+  };
+
+  const handleMouseHoverSliderFalse = () => {
+    console.log(mouseHoverSlider);
+    setMouseHoverSlider(false);
+  };
+
+  useEffect(() => {
+    if (!mouseHoverSlider) {
+      const timer = setTimeout(() => {
+        addActiveImage();
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    }
+  });
 
   return (
     <div>
       <div className={classes.pictureSliderContainer}>
-        <div className={classes.pictureSliderWrapper}>
+        <div
+          className={classes.pictureSliderWrapper}
+          onMouseLeave={handleMouseHoverSliderFalse}
+          onMouseEnter={handleMouseHoverSliderTrue}
+        >
           <button onClick={subtractActiveImage}>Scroll left!</button>
           {images.map((img, index) => (
             <React.Fragment key={index}>
