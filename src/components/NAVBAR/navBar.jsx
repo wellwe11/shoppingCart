@@ -23,7 +23,7 @@ const NavButtons = () => {
       <div className={btnClasses.wrapper}>
         <button
           className={btnClasses.style}
-          onClick={() => handleNavigate("profile/store")}
+          onClick={() => handleNavigate("./store")}
         >
           Store
         </button>
@@ -31,7 +31,7 @@ const NavButtons = () => {
       <div className={btnClasses.wrapper}>
         <button
           className={btnClasses.style}
-          onClick={() => handleNavigate("profile/cart")}
+          onClick={() => handleNavigate("./cart")}
         >
           Cart
         </button>

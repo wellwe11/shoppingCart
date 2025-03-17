@@ -1,16 +1,16 @@
-import App from "./App";
 import Profile from "./components/PROFILEPAGE/Profile";
 import ErrorPage from "./components/ERRORPAGE/ErrorPage";
 
 const routes = [
   {
     path: "/",
-    element: <App />,
+    element: <Profile />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "profile/:name",
+    path: "/:name",
     element: <Profile />,
+    errorElement: <ErrorPage />,
   },
 ];
 

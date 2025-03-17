@@ -1,0 +1,34 @@
+.pictureSliderContainer {
+  width: 100%;
+  height: 300px;
+
+  background-color: orange;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pictureSliderWrapper {
+  width: 50%;
+  height: 100%;
+
+  background-color: gray;
+
+  display: flex;
+  align-items: center;
+
+  //   overflow: hidden;
+}
+
+.imageContainer {
+  min-width: 100%;
+  height: 100%;
+}
+
+.pictureSliderImage {
+  height: 90%;
+  width: 100%;
+
+  background-color: red;
+}
