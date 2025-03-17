@@ -3,7 +3,7 @@ import classes from "./defaultPage.module.scss";
 import React from "react";
 
 const PictureSlider = () => {
-  const [activeImage, setActiveImage] = useState(0);
+  const [activeImage, setActiveImage] = useState(1);
   const [prevImage, setPrevImage] = useState(2);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
 
@@ -41,7 +41,7 @@ const PictureSlider = () => {
     if (!mouseHoverSlider) {
       const timer = setTimeout(() => {
         addActiveImage();
-      }, 3500);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -50,26 +50,45 @@ const PictureSlider = () => {
   return (
     <div>
       <div className={classes.pictureSliderContainer}>
+        <button
+          onClick={subtractActiveImage}
+          className={classes.leftButtonClicker}
+        >
+          Scroll left!
+        </button>
         <div
           className={classes.pictureSliderWrapper}
           onMouseLeave={handleMouseHoverSliderFalse}
           onMouseEnter={handleMouseHoverSliderTrue}
         >
-          <div
-            className={classes.visibleImageContainer}
-            style={{ marginLeft: `-${activeImage}00%` }}
-          >
-            {/* <button onClick={subtractActiveImage}>Scroll left!</button> */}
-            {images.map((img, index) => (
-              <React.Fragment key={index}>
-                <div key={index} className={classes.pictureSliderImage}>
-                  {index}
-                </div>
-              </React.Fragment>
-            ))}
-          </div>
-          {/* <button onClick={addActiveImage}>Scroll right!</button> */}
+          {images.map((img, index) => (
+            <React.Fragment key={index}>
+              <div
+                key={index}
+                className={classes.pictureSliderImage}
+                style={{
+                  marginLeft:
+                    index === activeImage
+                      ? "0%"
+                      : index === activeImage + 1
+                      ? "100%"
+                      : index === images.length - 1 || index === activeImage - 1
+                      ? "-100%"
+                      : "100%",
+                  transition:
+                    index === prevImage || index === activeImage
+                      ? "all 1s ease"
+                      : "",
+                }}
+              >
+                {index}
+              </div>
+            </React.Fragment>
+          ))}
         </div>
+        <button onClick={addActiveImage} className={classes.rightButtonClicker}>
+          Scroll right!
+        </button>
       </div>
     </div>
   );

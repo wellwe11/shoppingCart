@@ -15,24 +15,36 @@
 
   display: flex;
   align-items: center;
+
   overflow: hidden;
-}
+  border: 1px solid black;
 
-.visibleImageContainer {
-  transition: all 1s ease;
-  width: 100%;
-  height: 100%;
+  background-color: orange;
 
-  display: flex;
-}
-
-.imageContainer {
-  height: 100%;
+  position: relative;
 }
 
 .pictureSliderImage {
-  height: 90%;
-  min-width: 100%;
+  height: 100%;
+  width: 100%;
+
+  margin-left: 100%;
 
   background-color: red;
+
+  margin-left: 100%;
+
+  position: absolute;
+
+  border: 1px solid;
+}
+
+.leftButtonClicker,
+.rightButtonClicker {
+  height: 100%;
+  width: 100px;
+
+  background-color: green;
+
+  z-index: 1;
 }
