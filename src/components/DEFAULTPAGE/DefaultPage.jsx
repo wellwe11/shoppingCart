@@ -2,18 +2,37 @@ import { useEffect, useState } from "react";
 import classes from "./defaultPage.module.scss";
 import React from "react";
 
-const PictureSlider = () => {
+const PictureSliderSmall = ({ size }) => {
+  const images = [];
+
+  const createImages = () => {
+    for (let i = 0; i < size; i++) {
+      images.push(i);
+    }
+  };
+  createImages();
+  return (
+    <div className={classes.smallPictureSlider}>
+      <div className={classes.pictureSliderContainer}>
+        {images.map((img, index) => (
+          <div key={index} className={classes.pictureSliderImage}></div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const PictureSliderBig = ({ size }) => {
   const [activeImage, setActiveImage] = useState(1);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
+  const images = [];
 
-  const images = [
-    { img: "imgOne" },
-    { img: "imgTwo" },
-    { img: "imgThree" },
-    { img: "imgFour" },
-    { img: "imgFive" },
-    { img: "imgSix" },
-  ];
+  const createImages = () => {
+    for (let i = 0; i < size; i++) {
+      images.push(i);
+    }
+  };
+  createImages();
 
   const addActiveImage = () => {
     if (activeImage < images.length - 1) {
@@ -50,7 +69,7 @@ const PictureSlider = () => {
   });
 
   return (
-    <div>
+    <div className={classes.bigPictureSLider}>
       <div className={classes.pictureSliderContainer}>
         <button
           onClick={subtractActiveImage}
@@ -82,7 +101,8 @@ const PictureSlider = () => {
 const DefaultPage = () => {
   return (
     <div>
-      <PictureSlider />
+      <PictureSliderBig size={10} />
+      <PictureSliderSmall size={15} />
     </div>
   );
 };
