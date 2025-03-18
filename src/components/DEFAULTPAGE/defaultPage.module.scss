@@ -28,15 +28,16 @@
   height: 100%;
   width: 100%;
 
-  margin-left: 100%;
-
   background-color: red;
 
-  margin-left: 100%;
-
   position: absolute;
+  display: flex;
 
   border: 1px solid;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .leftButtonClicker,
