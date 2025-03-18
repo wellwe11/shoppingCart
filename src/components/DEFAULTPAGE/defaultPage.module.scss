@@ -41,8 +41,7 @@
     align-items: center;
   }
 
-  .leftButtonClicker,
-  .rightButtonClicker {
+  .buttonClicker {
     height: 100%;
     width: 100px;
 
@@ -56,17 +55,34 @@
   .pictureSliderContainer {
     width: 100%;
     height: 200px;
+    max-width: 1200px;
+
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    justify-self: center;
+  }
+
+  .pictureSliderWrapper {
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    overflow: hidden;
+    transition: transform 0.3s ease-out;
   }
 
   .pictureSliderImage {
-    min-width: 150px;
+    min-width: 15%;
     height: 100px;
     background-color: black;
-    border: 5px solid white;
-    margin: 5px;
+    border: 5px solid #242424;
+  }
+
+  .smallSliderButtons {
+    width: 5%;
+    height: 200px;
+    background-color: orange;
+    z-index: 1;
   }
 }
