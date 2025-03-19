@@ -3,7 +3,8 @@ import classes from "./defaultPage.module.scss";
 import React from "react";
 
 const PictureSliderSmall = ({ fetchedData }) => {
-  const [activeImage, setActiveImage] = useState(null);
+  // set active image to be length of visible images
+  const [activeImage, setActiveImage] = useState(6);
   const [dataFetched, setDataFetched] = useState(false);
   const [data, setData] = useState(null);
   const elementTarget = useRef(null);
@@ -16,10 +17,8 @@ const PictureSliderSmall = ({ fetchedData }) => {
   useEffect(() => {
     if (data !== null) {
       setDataFetched(true);
-      setActiveImage(data.length);
     }
   }, [data]);
-
   const addActiveImage = () => {
     if (activeImage < data.length && dataFetched) {
       setActiveImage((prevImg) => prevImg + 1);
@@ -27,8 +26,10 @@ const PictureSliderSmall = ({ fetchedData }) => {
   };
 
   const subtractActiveImage = () => {
-    if (activeImage >= 1 && dataFetched) {
+    // only allow it to go down back to 6 which is the amount of visible elements
+    if (activeImage > 6 && dataFetched) {
       setActiveImage((prevImg) => prevImg - 1);
+      console.log(activeImage);
     }
   };
 
@@ -52,15 +53,25 @@ const PictureSliderSmall = ({ fetchedData }) => {
 
   if (!dataFetched) return <div>Loading...</div>;
 
+  console.log(activeImage);
+
   return (
     <div className={classes.smallPictureSlider}>
       <div className={classes.pictureSliderContainer}>
-        <button onClick={addActiveImage} className={classes.smallSliderButtons}>
+        <button
+          onClick={subtractActiveImage}
+          className={classes.smallSliderButtons}
+        >
           Click me
         </button>
         <div
           style={{
-            transform: `translateX(-${data.length - activeImage}0%)`,
+            transform: `translateX(-${
+              activeImage * elementWidth <
+              activeImage * elementWidth - elementWidth * 6
+                ? activeImage * elementWidth
+                : activeImage * elementWidth - elementWidth * 6
+            }px)`,
           }}
           className={classes.pictureSliderWrapper}
         >
@@ -71,14 +82,12 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
               >
-                <img src={img.image} alt="" />
+                <img src={img.images[0]} alt="" />
+                {index}
               </div>
             ))}
         </div>
-        <button
-          onClick={subtractActiveImage}
-          className={classes.smallSliderButtons}
-        >
+        <button onClick={addActiveImage} className={classes.smallSliderButtons}>
           Click me
         </button>
       </div>

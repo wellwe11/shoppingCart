@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch("https://fakestoreapi.com/products/")
+    fetch("https://dummyjson.com/products?limit=60")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to load data");
@@ -23,7 +23,10 @@ const Profile = () => {
         return response.json();
       })
       .then((data) => {
-        setDataOne(data);
+        const filteredData = data.products.filter((product) =>
+          product.category.toLowerCase().includes("kitchen")
+        );
+        setDataOne(filteredData);
       })
       .catch((err) => {
         setError(err.message);
@@ -35,9 +38,9 @@ const Profile = () => {
 
   const { name } = useParams();
 
-  if (error) return <div>error</div>;
-
   if (loading) return <div>Loading data...</div>;
+
+  console.log(dataOne.products);
 
   return (
     <div>
