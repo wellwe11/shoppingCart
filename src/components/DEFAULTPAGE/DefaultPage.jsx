@@ -55,10 +55,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
   return (
     <div className={classes.smallPictureSlider}>
       <div className={classes.pictureSliderContainer}>
-        <button
-          onClick={subtractActiveImage}
-          className={classes.smallSliderButtons}
-        >
+        <button onClick={addActiveImage} className={classes.smallSliderButtons}>
           Click me
         </button>
         <div
@@ -74,11 +71,14 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
               >
-                {img.title}
+                <img src={img.image} alt="" />
               </div>
             ))}
         </div>
-        <button onClick={addActiveImage} className={classes.smallSliderButtons}>
+        <button
+          onClick={subtractActiveImage}
+          className={classes.smallSliderButtons}
+        >
           Click me
         </button>
       </div>
