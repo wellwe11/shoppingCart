@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch("https://dummyjson.com/products?limit=100")
+    fetch("https://dummyjson.com/products?limit=99")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to load data");
@@ -23,8 +23,9 @@ const Profile = () => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         const filteredData = data.products.filter((product) =>
-          product.category.toLowerCase().includes("kitchen")
+          product.category.toLowerCase().includes("watch")
         );
         setDataOne(filteredData);
       })
