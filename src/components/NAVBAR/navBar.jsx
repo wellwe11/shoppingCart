@@ -53,8 +53,8 @@ const Logo = () => {
 const NavBar = () => {
   return (
     <div className={classes.container}>
+      <Logo />
       <div className={classes.wrapper}>
-        <Logo />
         <NavButtons />
       </div>
     </div>

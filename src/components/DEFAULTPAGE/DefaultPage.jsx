@@ -2,19 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./defaultPage.module.scss";
 import React from "react";
 
-const PictureSliderSmall = ({ size }) => {
+const PictureSliderSmall = ({ fetchedData }) => {
   const [activeImage, setActiveImage] = useState(0);
-  const images = [];
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    setData(fetchedData);
+  }, [fetchedData]);
 
   const elementTarget = useRef(null);
   const [elementWidth, setElementWidth] = useState(null);
-
-  const createImages = () => {
-    for (let i = 0; i < size; i++) {
-      images.push(i);
-    }
-  };
-  createImages();
 
   const addActiveImage = () => {
     if (activeImage < 9) {
@@ -46,10 +43,6 @@ const PictureSliderSmall = ({ size }) => {
     };
   }, []);
 
-  console.log(elementWidth * activeImage);
-
-  console.log(elementWidth);
-
   return (
     <div className={classes.smallPictureSlider}>
       <div className={classes.pictureSliderContainer}>
@@ -65,14 +58,14 @@ const PictureSliderSmall = ({ size }) => {
           }}
           className={classes.pictureSliderWrapper}
         >
-          {images.map((img, index) => (
+          {/* {data.map((img, index) => (
             <div
               key={index}
               className={classes.pictureSliderImage}
               ref={elementTarget}
             >
-              {index}
-            </div>
+              {img.image}
+            </div> */}
           ))}
         </div>
         <button onClick={addActiveImage} className={classes.smallSliderButtons}>
@@ -83,20 +76,13 @@ const PictureSliderSmall = ({ size }) => {
   );
 };
 
-const PictureSliderBig = ({ size }) => {
+const PictureSliderBig = ({ fetchedData }) => {
   const [activeImage, setActiveImage] = useState(1);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
-  const images = [];
-
-  const createImages = () => {
-    for (let i = 0; i < size; i++) {
-      images.push(i);
-    }
-  };
-  createImages();
+  const [data, setData] = useState(fetchedData);
 
   const addActiveImage = () => {
-    if (activeImage < images.length - 1) {
+    if (activeImage < data.length - 1) {
       setActiveImage((prevImg) => prevImg + 1);
     } else {
       setActiveImage(0);
@@ -107,7 +93,7 @@ const PictureSliderBig = ({ size }) => {
     if (activeImage >= 1) {
       setActiveImage((prevImg) => prevImg - 1);
     } else {
-      setActiveImage(images.length - 1);
+      setActiveImage(data.length - 1);
     }
   };
 
@@ -140,13 +126,13 @@ const PictureSliderBig = ({ size }) => {
           onMouseLeave={handleMouseHoverSliderFalse}
           onMouseEnter={handleMouseHoverSliderTrue}
         >
-          {images.map((img, index) => (
+          {/* {data.map((img, index) => (
             <React.Fragment key={index}>
               {index === activeImage && (
                 <div className={classes.pictureSliderImage}>{index}</div>
               )}
             </React.Fragment>
-          ))}
+          ))} */}
         </div>
         <button onClick={addActiveImage} className={classes.buttonClicker}>
           Scroll right!
@@ -156,11 +142,11 @@ const PictureSliderBig = ({ size }) => {
   );
 };
 
-const DefaultPage = () => {
+const DefaultPage = ({ data }) => {
   return (
     <div>
-      <PictureSliderBig size={10} />
-      <PictureSliderSmall size={15} />
+      <PictureSliderBig fetchedData={data} />
+      <PictureSliderSmall fetchedData={data} />
     </div>
   );
 };

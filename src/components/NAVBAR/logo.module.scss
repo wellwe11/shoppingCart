@@ -1,9 +1,10 @@
 .container {
   height: 100%;
   min-width: 100%;
-  justify-self: center;
 
-  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper {
