@@ -4,7 +4,10 @@ import React from "react";
 
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
-  const [activeImage, setActiveImage] = useState(6);
+  // adjust this accordingly to make sure that the iamges are always visible
+  let visibleImages = 7;
+
+  const [activeImage, setActiveImage] = useState(visibleImages);
   const [dataFetched, setDataFetched] = useState(false);
   const [data, setData] = useState(null);
   const elementTarget = useRef(null);
@@ -27,7 +30,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
 
   const subtractActiveImage = () => {
     // only allow it to go down back to 6 which is the amount of visible elements
-    if (activeImage > 6 && dataFetched) {
+    if (activeImage > visibleImages && dataFetched) {
       setActiveImage((prevImg) => prevImg - 1);
       console.log(activeImage);
     }
@@ -68,9 +71,9 @@ const PictureSliderSmall = ({ fetchedData }) => {
           style={{
             transform: `translateX(-${
               activeImage * elementWidth <
-              activeImage * elementWidth - elementWidth * 6
+              activeImage * elementWidth - elementWidth * visibleImages
                 ? activeImage * elementWidth
-                : activeImage * elementWidth - elementWidth * 6
+                : activeImage * elementWidth - elementWidth * visibleImages
             }px)`,
           }}
           className={classes.pictureSliderWrapper}

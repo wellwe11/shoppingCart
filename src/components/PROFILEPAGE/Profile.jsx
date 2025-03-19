@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch("https://dummyjson.com/products?limit=60")
+    fetch("https://dummyjson.com/products?limit=100")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to load data");
