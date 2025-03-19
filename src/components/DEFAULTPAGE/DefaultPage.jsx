@@ -3,24 +3,31 @@ import classes from "./defaultPage.module.scss";
 import React from "react";
 
 const PictureSliderSmall = ({ fetchedData }) => {
-  const [activeImage, setActiveImage] = useState(0);
+  const [activeImage, setActiveImage] = useState(null);
+  const [dataFetched, setDataFetched] = useState(false);
   const [data, setData] = useState(null);
+  const elementTarget = useRef(null);
+  const [elementWidth, setElementWidth] = useState(null);
 
   useEffect(() => {
     setData(fetchedData);
   }, [fetchedData]);
 
-  const elementTarget = useRef(null);
-  const [elementWidth, setElementWidth] = useState(null);
+  useEffect(() => {
+    if (data !== null) {
+      setDataFetched(true);
+      setActiveImage(data.length);
+    }
+  }, [data]);
 
   const addActiveImage = () => {
-    if (activeImage < 9) {
+    if (activeImage < data.length && dataFetched) {
       setActiveImage((prevImg) => prevImg + 1);
     }
   };
 
   const subtractActiveImage = () => {
-    if (activeImage >= 1) {
+    if (activeImage >= 1 && dataFetched) {
       setActiveImage((prevImg) => prevImg - 1);
     }
   };
@@ -41,7 +48,9 @@ const PictureSliderSmall = ({ fetchedData }) => {
         resizeObserver.unobserve(elementTarget.current);
       }
     };
-  }, []);
+  }, [fetchedData]);
+
+  if (!dataFetched) return <div>Loading...</div>;
 
   return (
     <div className={classes.smallPictureSlider}>
@@ -54,19 +63,20 @@ const PictureSliderSmall = ({ fetchedData }) => {
         </button>
         <div
           style={{
-            transform: `translateX(-${(elementWidth - 8) * activeImage}px)`,
+            transform: `translateX(-${data.length - activeImage}0%)`,
           }}
           className={classes.pictureSliderWrapper}
         >
-          {/* {data.map((img, index) => (
-            <div
-              key={index}
-              className={classes.pictureSliderImage}
-              ref={elementTarget}
-            >
-              {img.image}
-            </div> */}
-          ))}
+          {dataFetched &&
+            data.map((img, index) => (
+              <div
+                key={index}
+                className={classes.pictureSliderImage}
+                ref={elementTarget}
+              >
+                {img.title}
+              </div>
+            ))}
         </div>
         <button onClick={addActiveImage} className={classes.smallSliderButtons}>
           Click me
