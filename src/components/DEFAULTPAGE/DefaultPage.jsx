@@ -14,7 +14,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
   const [elementWidth, setElementWidth] = useState(null);
 
   useEffect(() => {
-    setData(fetchedData);
+    setData(fetchedData.photos);
   }, [fetchedData]);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
       setDataFetched(true);
     }
   }, [data]);
+
   const addActiveImage = () => {
     if (activeImage < data.length && dataFetched) {
       setActiveImage((prevImg) => prevImg + 1);
@@ -32,7 +33,6 @@ const PictureSliderSmall = ({ fetchedData }) => {
     // only allow it to go down back to 6 which is the amount of visible elements
     if (activeImage > visibleImages && dataFetched) {
       setActiveImage((prevImg) => prevImg - 1);
-      console.log(activeImage);
     }
   };
 
@@ -55,8 +55,6 @@ const PictureSliderSmall = ({ fetchedData }) => {
   }, [fetchedData]);
 
   if (!dataFetched) return <div>Loading...</div>;
-
-  console.log(activeImage);
 
   return (
     <div className={classes.smallPictureSlider}>
@@ -85,7 +83,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
               >
-                <img src={img.images[0]} alt="" />
+                <img src={img.src.medium} alt="" />
                 {index}
               </div>
             ))}
@@ -101,7 +99,22 @@ const PictureSliderSmall = ({ fetchedData }) => {
 const PictureSliderBig = ({ fetchedData }) => {
   const [activeImage, setActiveImage] = useState(1);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
-  const [data, setData] = useState(fetchedData);
+  const [dataFetched, setDataFetched] = useState(false);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchedPhotos = fetchedData.photos.filter((_, index) => index < 5);
+
+    console.log(fetchedPhotos);
+
+    setData(fetchedPhotos);
+  }, [fetchedData]);
+
+  useEffect(() => {
+    if (data !== null) {
+      setDataFetched(true);
+    }
+  }, [data]);
 
   const addActiveImage = () => {
     if (activeImage < data.length - 1) {
@@ -148,13 +161,16 @@ const PictureSliderBig = ({ fetchedData }) => {
           onMouseLeave={handleMouseHoverSliderFalse}
           onMouseEnter={handleMouseHoverSliderTrue}
         >
-          {/* {data.map((img, index) => (
-            <React.Fragment key={index}>
-              {index === activeImage && (
-                <div className={classes.pictureSliderImage}>{index}</div>
-              )}
-            </React.Fragment>
-          ))} */}
+          {dataFetched &&
+            data.map((img, index) => (
+              <React.Fragment key={index}>
+                {index === activeImage && (
+                  <div className={classes.pictureSliderImage}>
+                    <img src={img.src.landscape} alt="" />
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
         </div>
         <button onClick={addActiveImage} className={classes.buttonClicker}>
           Scroll right!

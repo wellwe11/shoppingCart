@@ -41,6 +41,12 @@
     align-items: center;
   }
 
+  .pictureSliderImage img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
   .buttonClicker {
     height: 100%;
     width: 100px;
@@ -84,7 +90,7 @@
     width: 100%;
     height: 100%;
 
-    object-fit: fill;
+    object-fit: scale-down;
   }
 
   .smallSliderButtons {
