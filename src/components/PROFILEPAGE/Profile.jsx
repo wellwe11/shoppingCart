@@ -20,12 +20,14 @@ const Profile = () => {
       setLoading(true);
       try {
         const [fetchedOne, fetchedTwo] = await Promise.all([
-          fetch("https://api.pexels.com/v1/search?query=wrist watch", {
-            method: "GET",
-            headers: {
-              Authorization: PEXEL_API_KEY,
-            },
-          }).then((response) => response.json()),
+          fetch(
+            "https://api.pexels.com/v1/search?query=smartwatch&per_page=20",
+            {
+              headers: {
+                Authorization: PEXEL_API_KEY,
+              },
+            }
+          ).then((response) => response.json()),
 
           fetch("https://dummyjson.com/products/search?q=watch").then(
             (response) => response.json()

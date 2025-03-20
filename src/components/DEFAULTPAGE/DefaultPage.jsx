@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./defaultPage.module.scss";
 import React from "react";
 
+import { SvgArrowLeft, SvgArrowRight } from "./svgArrows";
+
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
   // adjust this accordingly to make sure that the iamges are always visible
@@ -57,7 +59,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
   if (!dataFetched) return <div>Loading...</div>;
 
   return (
-    <div className={classes.smallPictureSlider}>
+    <section className={classes.smallPictureSlider}>
       <div className={classes.pictureSliderContainer}>
         <button
           onClick={subtractActiveImage}
@@ -92,7 +94,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
           Click me
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 
@@ -103,7 +105,9 @@ const PictureSliderBig = ({ fetchedData }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const fetchedPhotos = fetchedData.photos.filter((_, index) => index < 5);
+    const fetchedPhotos = fetchedData.photos.filter(
+      (img, index) => index > 10 && index < 17 && img.width > 4000
+    );
 
     setData(fetchedPhotos);
   }, [fetchedData]);
@@ -149,10 +153,10 @@ const PictureSliderBig = ({ fetchedData }) => {
   });
 
   return (
-    <div className={classes.bigPictureSLider}>
+    <section className={classes.bigPictureSLider}>
       <div className={classes.pictureSliderContainer}>
         <button onClick={subtractActiveImage} className={classes.buttonClicker}>
-          Scroll left!
+          <SvgArrowRight />
         </button>
         <div
           className={classes.pictureSliderWrapper}
@@ -162,19 +166,81 @@ const PictureSliderBig = ({ fetchedData }) => {
           {dataFetched &&
             data.map((img, index) => (
               <React.Fragment key={index}>
-                {index === activeImage && (
-                  <div className={classes.pictureSliderImage}>
-                    <img src={img.src.landscape} alt="" />
-                  </div>
-                )}
+                <div
+                  className={`${classes.pictureSliderImage} ${
+                    index === activeImage
+                      ? classes.pictureSliderImageInView
+                      : classes.pictureSliderImageOutView
+                  }`}
+                >
+                  <img src={img.src.landscape} alt={img.src.alt} />
+                </div>
               </React.Fragment>
             ))}
         </div>
         <button onClick={addActiveImage} className={classes.buttonClicker}>
-          Scroll right!
+          <SvgArrowLeft />
         </button>
       </div>
-    </div>
+    </section>
+  );
+};
+
+const ProductInformationSection = () => {
+  return (
+    <section className={classes.ProductInformationSection}>
+      <div className={classes.textContainer}>
+        <div className={classes.introSectionText}>
+          {/* <div className={`${classes.spacer} ${classes.layer1}`}></div> */}
+
+          <div className={classes.firstTextWrapper}>
+            <div className={classes.firstText}>
+              <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                est Lorem ipsum dolor sit amet.
+              </p>
+            </div>
+          </div>
+          <div className={classes.wave}>
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                class="shape-fill"
+              ></path>
+            </svg>
+          </div>
+          <div className={classes.secondTextWrapper}>
+            <div className={classes.secondText}>
+              <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                est Lorem ipsum dolor sit amet.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -182,6 +248,7 @@ const DefaultPage = ({ data, dataTwo }) => {
   return (
     <div>
       <PictureSliderBig fetchedData={data} />
+      <ProductInformationSection />
       <PictureSliderSmall fetchedData={dataTwo} />
     </div>
   );

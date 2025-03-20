@@ -1,0 +1,21 @@
+.iconRight,
+.iconLeft {
+  border-radius: 100px;
+  transition: all 0.5s ease;
+  fill: rgba(255, 255, 255, 0.707);
+  background-color: rgba(128, 128, 128, 0.244);
+}
+
+.iconRight:hover,
+.iconLeft:hover {
+  fill: rgba(255, 255, 255, 0.887);
+  background-color: rgba(128, 128, 128, 0.657);
+}
+
+.iconRight:hover {
+  margin-left: 10px;
+}
+
+.iconLeft:hover {
+  margin-right: 10px;
+}

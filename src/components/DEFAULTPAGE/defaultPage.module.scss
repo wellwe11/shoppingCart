@@ -1,28 +1,29 @@
 .bigPictureSLider {
   .pictureSliderContainer {
     width: 100%;
-    height: 300px;
+    height: 500px;
 
     background-color: orange;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
   }
 
   .pictureSliderWrapper {
-    width: 50%;
+    width: 100vw;
     height: 100%;
 
     display: flex;
     align-items: center;
 
     overflow: hidden;
-    border: 1px solid black;
 
     background-color: orange;
 
-    position: relative;
+    position: absolute;
   }
 
   .pictureSliderImage {
@@ -34,11 +35,19 @@
     position: absolute;
     display: flex;
 
-    border: 1px solid;
-
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: all 1s ease-out;
+  }
+
+  .pictureSliderImageInView {
+    opacity: 1;
+  }
+
+  .pictureSliderImageOutView {
+    opacity: 0;
   }
 
   .pictureSliderImage img {
@@ -49,11 +58,24 @@
 
   .buttonClicker {
     height: 100%;
-    width: 100px;
-
-    background-color: green;
+    width: 5%;
 
     z-index: 1;
+
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .buttonClicker:nth-of-type(1) {
+    margin-left: 95%;
+  }
+
+  .buttonClicker:nth-of-type(2) {
+    margin-left: -95%;
   }
 }
 
@@ -98,5 +120,94 @@
     height: 200px;
     background-color: orange;
     z-index: 1;
+  }
+}
+
+.ProductInformationSection {
+  .textContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    justify-self: center;
+    align-self: center;
+    height: 800px;
+  }
+
+  .introSectionText {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .firstTextWrapper,
+  .secondTextWrapper {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .firstTextWrapper {
+    background-color: #fdf7e3;
+    color: black;
+  }
+
+  .secondTextWrapper {
+    background-color: black;
+    color: white;
+  }
+
+  .firstText {
+    min-height: 50%;
+    width: 50%;
+
+    margin-left: -300px;
+    margin-top: -100px;
+  }
+
+  .secondText {
+    min-height: 50%;
+    width: 50%;
+
+    margin-right: -300px;
+    margin-top: -100px;
+  }
+
+  .wave {
+    min-width: 100%;
+    margin-top: -250px;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave svg {
+    position: relative;
+    display: block;
+    width: calc(174% + 1.3px);
+    height: 292px;
+  }
+
+  .wave .shape-fill {
+    fill: #ffffff;
+  }
+  .spacer {
+    aspect-ratio: 960/300;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    margin-top: 50px;
+    z-index: 1;
+  }
+
+  .layer1 {
+    background-image: url(./layered-waves-haikei.svg);
   }
 }
