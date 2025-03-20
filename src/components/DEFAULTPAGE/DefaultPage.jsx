@@ -66,7 +66,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
           onClick={subtractActiveImage}
           className={classes.smallSliderButtons}
         >
-          Click me
+          <SvgArrowLeft />
         </button>
         <div
           style={{
@@ -87,12 +87,11 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 ref={elementTarget}
               >
                 <img src={img.images[0]} alt="" />
-                {index}
               </div>
             ))}
         </div>
         <button onClick={addActiveImage} className={classes.smallSliderButtons}>
-          Click me
+          <SvgArrowRight />
         </button>
       </div>
     </section>
