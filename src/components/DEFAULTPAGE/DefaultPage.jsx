@@ -60,6 +60,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
 
   return (
     <section className={classes.smallPictureSlider}>
+      <div className={`${classes.spacer} ${classes.layer1}`}></div>
       <div className={classes.pictureSliderContainer}>
         <button
           onClick={subtractActiveImage}
@@ -191,8 +192,6 @@ const ProductInformationSection = () => {
     <section className={classes.ProductInformationSection}>
       <div className={classes.textContainer}>
         <div className={classes.introSectionText}>
-          {/* <div className={`${classes.spacer} ${classes.layer1}`}></div> */}
-
           <div className={classes.firstTextWrapper}>
             <div className={classes.firstText}>
               <p>
