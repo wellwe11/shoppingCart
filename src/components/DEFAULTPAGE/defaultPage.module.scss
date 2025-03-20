@@ -3,7 +3,7 @@
     width: 100%;
     height: 500px;
 
-    background-color: orange;
+    background-color: black;
 
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@
     align-items: center;
     overflow: hidden;
 
-    background-color: orange;
+    background-color: black;
 
     position: absolute;
   }
@@ -231,6 +231,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    height: 500px;
   }
 
   .buttonContainer {
@@ -247,19 +249,24 @@
     margin: 10px;
     border-radius: 10px;
 
-    background-color: rgb(58, 52, 52);
+    background-color: rgb(75, 75, 75);
 
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .buttonContainer button:hover {
+    background-color: rgb(61, 61, 61);
+  }
+
   .serviceText {
     display: flex;
 
-    align-items: center;
+    align-items: flex-start;
 
     width: 50%;
+    height: 400px;
   }
 
   .serviceText p {
@@ -273,6 +280,7 @@
     background-position: center;
     background-size: cover;
   }
+
   .layer1 {
     background-image: url(./wave-haikei.svg);
   }

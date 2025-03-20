@@ -10,6 +10,18 @@
 .wrapper {
   color: black;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  line-height: 1.1;
+}
+
+.wrapper h1 {
+  font-size: 52px;
+}
+
+.wrapper h3 {
+  font-size: 22px;
+  letter-spacing: 4px;
 }

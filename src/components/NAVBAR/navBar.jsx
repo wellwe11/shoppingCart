@@ -33,7 +33,7 @@ const NavButtons = () => {
           className={btnClasses.style}
           onClick={() => handleNavigate("./cart")}
         >
-          Cart
+          About us
         </button>
       </div>
     </div>
@@ -44,7 +44,19 @@ const Logo = () => {
   return (
     <div className={logoClasses.container}>
       <div className={logoClasses.wrapper}>
-        <h1>This is a Logo</h1>
+        <h1>Ryander</h1>
+        <h3>Smartwatches</h3>
+      </div>
+    </div>
+  );
+};
+
+const NavIcons = () => {
+  return (
+    <div>
+      <div className={classes.iconContainer}>
+        <div>Cart</div>
+        <div>Search</div>
       </div>
     </div>
   );
@@ -57,6 +69,7 @@ const NavBar = () => {
       <div className={classes.wrapper}>
         <NavButtons />
       </div>
+      {/* <NavIcons /> */}
     </div>
   );
 };

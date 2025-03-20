@@ -50,6 +50,13 @@ const Profile = () => {
 
   const { name } = useParams();
 
+  const pages = {
+    cart: CartPage,
+    store: StorePage,
+  };
+
+  const PageToView = pages[name];
+
   if (loading) return <div>Loading data...</div>;
 
   if (error) return <div>ERROR</div>;
@@ -58,10 +65,8 @@ const Profile = () => {
     <div>
       <NavBar />
       <div>
-        {name === "store" ? (
-          <StorePage />
-        ) : name === "cart" ? (
-          <CartPage />
+        {name ? (
+          <PageToView />
         ) : (
           <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}

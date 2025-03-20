@@ -54,7 +54,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
         resizeObserver.unobserve(elementTarget.current);
       }
     };
-  }, [fetchedData]);
+  }, [fetchedData, activeImage]);
 
   if (!dataFetched) return <div>Loading...</div>;
 
@@ -71,10 +71,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
         <div
           style={{
             transform: `translateX(-${
-              activeImage * elementWidth <
               activeImage * elementWidth - elementWidth * visibleImages
-                ? activeImage * elementWidth
-                : activeImage * elementWidth - elementWidth * visibleImages
             }px)`,
           }}
           className={classes.pictureSliderWrapper}
@@ -240,27 +237,29 @@ const ProductInformationSection = () => {
 };
 
 const ServiceInformation = () => {
+  const [activePage, setActivePage] = useState(0);
+
+  const promisePhrases = [
+    `Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.`,
+    `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
+    `Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. `,
+    `At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.`,
+  ];
+
   return (
     <section className={classes.serviceInformation}>
       <div className={classes.serviceInformationCotnainer}>
         <div className={classes.buttonContainer}>
-          <button>Our services</button>
-          <button>What we prodive</button>
-          <button>Where to go from here</button>
-          <button>We promise</button>
+          <button onClick={() => setActivePage(0)}>Our services</button>
+          <button onClick={() => setActivePage(1)}>What we prodive</button>
+          <button onClick={() => setActivePage(2)}>
+            Where to go from here
+          </button>
+          <button onClick={() => setActivePage(3)}>We promise</button>
         </div>
         <div className={classes.serviceText}>
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
+          <p>{promisePhrases[activePage]}</p>
         </div>
       </div>
       <div className={`${classes.spacer} ${classes.layer1}`}></div>
