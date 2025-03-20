@@ -27,8 +27,9 @@ const Profile = () => {
             },
           }).then((response) => response.json()),
 
-          // find second API and fetch PRODUCTS
-          // fetch("otherApi").then((response) => response.json()),
+          fetch("https://dummyjson.com/products/search?q=watch").then(
+            (response) => response.json()
+          ),
         ]);
 
         setDataOne(fetchedOne);
@@ -42,10 +43,9 @@ const Profile = () => {
     };
 
     fetchData();
-
-    console.log(dataOne);
   }, []);
 
+  console.log(dataOne, dataTwo);
   const { name } = useParams();
 
   if (loading) return <div>Loading data...</div>;
@@ -61,7 +61,7 @@ const Profile = () => {
         ) : name === "cart" ? (
           <CartPage />
         ) : (
-          <DefaultPage data={dataOne} />
+          <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}
       </div>
     </div>

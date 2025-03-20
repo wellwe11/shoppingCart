@@ -14,7 +14,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
   const [elementWidth, setElementWidth] = useState(null);
 
   useEffect(() => {
-    setData(fetchedData.photos);
+    setData(fetchedData.products);
   }, [fetchedData]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
               >
-                <img src={img.src.medium} alt="" />
+                <img src={img.images[0]} alt="" />
                 {index}
               </div>
             ))}
@@ -104,8 +104,6 @@ const PictureSliderBig = ({ fetchedData }) => {
 
   useEffect(() => {
     const fetchedPhotos = fetchedData.photos.filter((_, index) => index < 5);
-
-    console.log(fetchedPhotos);
 
     setData(fetchedPhotos);
   }, [fetchedData]);
@@ -180,11 +178,11 @@ const PictureSliderBig = ({ fetchedData }) => {
   );
 };
 
-const DefaultPage = ({ data }) => {
+const DefaultPage = ({ data, dataTwo }) => {
   return (
     <div>
       <PictureSliderBig fetchedData={data} />
-      <PictureSliderSmall fetchedData={data} />
+      <PictureSliderSmall fetchedData={dataTwo} />
     </div>
   );
 };
