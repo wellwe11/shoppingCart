@@ -48,7 +48,6 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  console.log(dataOne, dataTwo);
   const { name } = useParams();
 
   if (loading) return <div>Loading data...</div>;
