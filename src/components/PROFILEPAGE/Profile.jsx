@@ -3,6 +3,7 @@ import DefaultPage from "../DEFAULTPAGE/DefaultPage";
 import CartPage from "../CARTPAGE/cartPage";
 import StorePage from "../STOREPAGE/storePage";
 import NavBar from "../NAVBAR/navBar";
+import Footer from "../FOOTER/footer";
 
 const PEXEL_API_KEY = import.meta.env.VITE_PEXEP_API_KEY;
 
@@ -66,6 +67,7 @@ const Profile = () => {
           <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}
       </div>
+      <Footer />
     </div>
   );
 };

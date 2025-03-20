@@ -242,12 +242,42 @@ const ProductInformationSection = () => {
   );
 };
 
+const ServiceInformation = () => {
+  return (
+    <section className={classes.serviceInformation}>
+      <div className={classes.serviceInformationCotnainer}>
+        <div className={classes.buttonContainer}>
+          <button>Our services</button>
+          <button>What we prodive</button>
+          <button>Where to go from here</button>
+          <button>We promise</button>
+        </div>
+        <div className={classes.serviceText}>
+          <p>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+      </div>
+      <div className={`${classes.spacer} ${classes.layer1}`}></div>
+    </section>
+  );
+};
+
 const DefaultPage = ({ data, dataTwo }) => {
   return (
     <div>
       <PictureSliderBig fetchedData={data} />
       <ProductInformationSection />
       <PictureSliderSmall fetchedData={dataTwo} />
+      <ServiceInformation />
     </div>
   );
 };
