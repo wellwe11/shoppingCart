@@ -2,13 +2,18 @@ import { Link, useParams } from "react-router-dom";
 import DefaultPage from "../DEFAULTPAGE/DefaultPage";
 import CartPage from "../CARTPAGE/cartPage";
 import StorePage from "../STOREPAGE/storePage";
-import NavBar from "../NAVBAR/navBar";
-import Footer from "../FOOTER/footer";
 
 const PEXEL_API_KEY = import.meta.env.VITE_PEXEP_API_KEY;
 
 import classes from "./profileStyles.module.css";
 import { useEffect, useState } from "react";
+
+import NavBar from "../NAVBAR/navBar";
+import Footer from "../FOOTER/footer";
+const pages = {
+  cart: CartPage,
+  store: StorePage,
+};
 
 const Profile = () => {
   const [dataOne, setDataOne] = useState(null);
@@ -49,11 +54,6 @@ const Profile = () => {
   }, []);
 
   const { name } = useParams();
-
-  const pages = {
-    cart: CartPage,
-    store: StorePage,
-  };
 
   const PageToView = pages[name];
 
