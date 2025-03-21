@@ -1,6 +1,4 @@
 import classes from "./navBar.module.scss";
-import btnClasses from "./navBarButtons.module.scss";
-import logoClasses from "./logo.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavButtons = () => {
@@ -11,26 +9,23 @@ const NavButtons = () => {
   };
 
   return (
-    <div className={btnClasses.container}>
-      <div className={btnClasses.wrapper}>
-        <button
-          className={btnClasses.style}
-          onClick={() => handleNavigate("../")}
-        >
+    <div className={`${classes.navBarBtns} ${classes.container}`}>
+      <div className={classes.wrapper}>
+        <button className={classes.style} onClick={() => handleNavigate("../")}>
           Front page
         </button>
       </div>
-      <div className={btnClasses.wrapper}>
+      <div className={classes.wrapper}>
         <button
-          className={btnClasses.style}
+          className={classes.style}
           onClick={() => handleNavigate("./store")}
         >
           Store
         </button>
       </div>
-      <div className={btnClasses.wrapper}>
+      <div className={classes.wrapper}>
         <button
-          className={btnClasses.style}
+          className={classes.style}
           onClick={() => handleNavigate("./cart")}
         >
           About us
@@ -42,8 +37,8 @@ const NavButtons = () => {
 
 const Logo = () => {
   return (
-    <div className={logoClasses.container}>
-      <div className={logoClasses.wrapper}>
+    <div className={`${classes.logo} ${classes.container}`}>
+      <div className={classes.wrapper}>
         <h1>Ryander</h1>
         <h3>Smartwatches</h3>
       </div>
@@ -64,12 +59,12 @@ const NavIcons = () => {
 
 const NavBar = () => {
   return (
-    <div className={classes.container}>
+    <div className={`${classes.NavBar} ${classes.container}`}>
       <Logo />
       <div className={classes.wrapper}>
         <NavButtons />
       </div>
-      {/* <NavIcons /> */}
+      <NavIcons />
     </div>
   );
 };

@@ -40,4 +40,5 @@ html {
 
 body {
   max-width: 1440px;
+  justify-self: center;
 }
