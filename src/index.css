@@ -40,5 +40,5 @@ html {
 
 body {
   max-width: 1440px;
-  justify-self: center;
+  /*dont align self center*/
 }
