@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import classes from "./storePage.module.scss";
+import starImage from "./rating.png";
+
+console.log(starImage);
 
 const StorePage = ({ data }) => {
   const [fetchedData, setFetchedData] = useState(null);
@@ -61,8 +64,20 @@ const StorePage = ({ data }) => {
             >
               <img src={image.images[0]} alt="" />
               <div className={classes.imageInfo}>
-                <p>{image.price}</p>
-                <p>{image.rating}</p>
+                <div className={classes.imagePrice}>
+                  <p>{image.price}</p>
+                </div>
+                <div className={classes.imageRatingWrapper}>
+                  <div
+                    className={classes.imageRatingCover}
+                    style={{ marginRight: `-${Number(image.rating) * 40}%` }}
+                  ></div>
+                  <img
+                    src={starImage}
+                    alt="image rating"
+                    className={classes.imageRating}
+                  />
+                </div>
               </div>
             </div>
           ))}
