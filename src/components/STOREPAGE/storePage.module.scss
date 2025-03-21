@@ -1,5 +1,5 @@
 .storePage {
-  background-color: black;
+  background-color: white;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -17,7 +17,7 @@
 
     border-radius: 50px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    background-color: rgba(27, 22, 22, 0.18);
+    background-color: white;
 
     cursor: pointer;
 
@@ -44,13 +44,12 @@
     justify-items: center;
 
     grid-template-columns: 33% 33% 33%;
+    color: black;
   }
 
   .imageRatingWrapper {
     width: 100px;
     height: 30px;
-
-    background-color: black;
 
     z-index: 10;
 
@@ -66,7 +65,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-color: black;
+    background-color: white;
 
     z-index: 1;
   }
@@ -75,16 +74,15 @@
     min-height: 100%;
     min-width: 100%;
     object-fit: cover;
-    filter: invert(1);
   }
 
   .imageWrapper:hover {
-    box-shadow: rgba(81, 81, 81, 0.12) 0px 1px 3px,
-      rgba(159, 159, 159, 0.24) 0px 1px 2px;
   }
 
   .imageWrapper img {
     height: 90%;
     width: 90%;
+    justify-self: center;
+    align-self: center;
   }
 }
