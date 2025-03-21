@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import DefaultPage from "../DEFAULTPAGE/DefaultPage";
 import CartPage from "../CARTPAGE/cartPage";
 import StorePage from "../STOREPAGE/storePage";
+import AboutUsPage from "../ABOUTUSPAGE/aboutUs";
 
 const PEXEL_API_KEY = import.meta.env.VITE_PEXEP_API_KEY;
 
@@ -13,6 +14,7 @@ import Footer from "../FOOTER/footer";
 const pages = {
   cart: CartPage,
   store: StorePage,
+  aboutUs: AboutUsPage,
 };
 
 const Profile = () => {
@@ -66,7 +68,7 @@ const Profile = () => {
       <NavBar />
       <div>
         {name ? (
-          <PageToView />
+          <PageToView data={dataTwo} />
         ) : (
           <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}

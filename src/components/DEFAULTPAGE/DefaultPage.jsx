@@ -184,13 +184,38 @@ const PictureSliderBig = ({ fetchedData }) => {
 };
 
 const ProductInformationSection = () => {
+  // ref for effect below
+  const textElementsRef = useRef([]);
+  const textElementsRefTwo = useRef([]);
+
+  // creates a smooth transition for events to make them look a bit
+  // nicer when scrolling
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("show");
+          entry.target.classList.add(`${classes.show}`);
+        } else {
+          entry.target.classList.remove(`${classes.show}`);
+        }
+      });
+    });
+
+    if (textElementsRef.current) observer.observe(textElementsRef.current);
+    if (textElementsRefTwo.current)
+      observer.observe(textElementsRefTwo.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className={classes.ProductInformationSection}>
       <div className={classes.textContainer}>
         <div className={classes.introSectionText}>
           <div className={classes.firstTextWrapper}>
             <div className={classes.firstText}>
-              <p>
+              <p ref={textElementsRef}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                 aliquyam erat, sed diam voluptua. At vero eos et accusam et
@@ -215,8 +240,11 @@ const ProductInformationSection = () => {
             </svg>
           </div>
           <div className={classes.secondTextWrapper}>
-            <div className={classes.secondText}>
-              <p>
+            <div
+              className={classes.secondText}
+              // ref={(e) => (elementsRef.current = e)}
+            >
+              <p ref={textElementsRefTwo}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                 aliquyam erat, sed diam voluptua. At vero eos et accusam et

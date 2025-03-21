@@ -1,1 +1,56 @@
+.storePage {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
+  .imagesContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 800px;
+
+    flex-wrap: wrap;
+  }
+
+  .imageWrapper {
+    width: 40%;
+
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: rgba(27, 22, 22, 0.18);
+
+    cursor: pointer;
+
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 0.33s;
+  }
+
+  .show {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+  }
+
+  .imageInfo {
+    display: flex;
+  }
+
+  .imageWrapper p {
+    margin-left: 50px;
+    margin-bottom: 30px;
+  }
+
+  .imageWrapper:hover {
+    box-shadow: rgba(81, 81, 81, 0.12) 0px 1px 3px,
+      rgba(159, 159, 159, 0.24) 0px 1px 2px;
+  }
+
+  .imageWrapper img {
+    height: 90%;
+    width: 90%;
+  }
+}

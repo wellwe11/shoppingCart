@@ -1,5 +1,8 @@
 import classes from "./navBar.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import SearchSvg from "./searchSvg";
+import { useEffect, useState } from "react";
+import CartIconSVG from "./cartIconSVG";
 
 const NavButtons = () => {
   const navigate = useNavigate();
@@ -30,7 +33,7 @@ const NavButtons = () => {
         <div className={classes.wrapper}>
           <button
             className={classes.style}
-            onClick={() => handleNavigate("./cart")}
+            onClick={() => handleNavigate("./aboutUs")}
           >
             About us
           </button>
@@ -41,23 +44,73 @@ const NavButtons = () => {
 };
 
 const NavIcons = () => {
+  const [searchHover, setSearchHover] = useState(false);
+  const [searchFocus, setSearchFocus] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleNavigate = (link) => {
+    navigate(`/${link}`);
+  };
+
+  const handleSearchHoverEnter = () => {
+    setSearchHover(true);
+  };
+
+  const handleSearchHoverLeave = () => {
+    setSearchHover(false);
+  };
+
+  const handleSearchFocusEnter = () => {
+    setSearchFocus(true);
+  };
+
+  const handleSearchFocusLeave = () => {
+    setSearchFocus(false);
+  };
+
   return (
     <div className={classes.navIcons}>
       <div className={classes.iconContainer}>
-        <button>Cart</button>
-        <input placeholder="search..." />
+        <input
+          placeholder="search..."
+          className={
+            searchHover || searchFocus ? classes.iconContainerInputHover : ""
+          }
+          onMouseEnter={handleSearchHoverEnter}
+          onMouseLeave={handleSearchHoverLeave}
+          onFocus={handleSearchFocusEnter}
+          onBlur={handleSearchFocusLeave}
+        />
+        <div
+          className={classes.searchSVG}
+          onMouseEnter={handleSearchHoverEnter}
+          onMouseLeave={handleSearchHoverLeave}
+        >
+          <SearchSvg />
+        </div>
+        <button onClick={() => handleNavigate("./cart")}>
+          <div className={classes.cartIconSVG}>
+            <CartIconSVG />
+          </div>
+        </button>
       </div>
     </div>
   );
 };
 
 const Logo = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (link) => {
+    navigate(`/${link}`);
+  };
   return (
     <div className={classes.logo}>
       <NavIcons />
       <div className={classes.container}>
         <div className={classes.wrapper}>
-          <h1>Ryander</h1>
+          <h1 onClick={() => handleNavigate("./")}>Ryander</h1>
           <h3>Smartwatches</h3>
         </div>
       </div>
