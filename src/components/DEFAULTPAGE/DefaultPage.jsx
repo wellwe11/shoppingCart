@@ -3,6 +3,7 @@ import classes from "./defaultPage.module.scss";
 import React from "react";
 
 import { SvgArrowLeft, SvgArrowRight } from "./svgArrows";
+import { useNavigate } from "react-router-dom";
 
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
@@ -14,6 +15,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
   const [data, setData] = useState(null);
   const elementTarget = useRef(null);
   const [elementWidth, setElementWidth] = useState(null);
+  const [clickedImage, setClickedImage] = useState(null);
 
   useEffect(() => {
     setData(fetchedData.products);
@@ -56,6 +58,12 @@ const PictureSliderSmall = ({ fetchedData }) => {
     };
   }, [fetchedData, activeImage]);
 
+  const navigate = useNavigate();
+
+  const handleNavigate = (e) => {
+    navigate(`./store/product=${e}`);
+  };
+
   if (!dataFetched) return <div>Loading...</div>;
 
   return (
@@ -82,6 +90,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 key={index}
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
+                onClick={() => handleNavigate(index)}
               >
                 <img src={img.images[0]} alt="" />
               </div>

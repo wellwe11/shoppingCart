@@ -7,7 +7,7 @@
   .imagesContainer {
     display: flex;
     justify-content: space-evenly;
-    width: 800px;
+    width: 50%;
 
     flex-wrap: wrap;
 
@@ -23,14 +23,23 @@
 
     cursor: pointer;
 
-    margin-top: 50px;
-
     display: flex;
     flex-direction: column;
     text-align: start;
-    opacity: 0;
-    filter: blur(5px);
-    transition: all 0.33s;
+    justify-content: center;
+
+    margin-top: 20px;
+
+    // opacity: 0;
+    // filter: blur(5px);
+    // transition: all 0.33s;
+  }
+
+  .imageWrapper img {
+    height: 80%;
+    width: 80%;
+    justify-self: center;
+    align-self: center;
   }
 
   .show {
@@ -46,6 +55,7 @@
     justify-items: center;
 
     color: black;
+    height: 10%;
   }
 
   .imageRatingWrapper {
@@ -79,11 +89,15 @@
 
   .imageWrapper:hover {
   }
+}
 
-  .imageWrapper img {
-    height: 90%;
-    width: 90%;
-    justify-self: center;
-    align-self: center;
+.productInfo {
+  .productText {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    height: 100px;
+    width: 400px;
   }
 }

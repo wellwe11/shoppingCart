@@ -1,5 +1,6 @@
 import Profile from "./components/PROFILEPAGE/Profile";
 import ErrorPage from "./components/ERRORPAGE/ErrorPage";
+import StorePage from "./components/STOREPAGE/storePage";
 
 const routes = [
   {
@@ -10,6 +11,11 @@ const routes = [
   {
     path: "/:name",
     element: <Profile />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/store/product=number",
+    element: <StorePage clickedProduct={number} />,
     errorElement: <ErrorPage />,
   },
 ];
