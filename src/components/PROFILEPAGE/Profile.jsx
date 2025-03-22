@@ -58,9 +58,11 @@ const Profile = () => {
 
   const { name } = useParams();
 
-  const PageToView = pages[name];
+  const { product } = useParams();
 
-  const [smallImageClicked, setSmallImageClicked] = useState(null);
+  console.log(product);
+
+  const PageToView = pages[name];
 
   if (loading) return <div>Loading data...</div>;
 
@@ -70,21 +72,12 @@ const Profile = () => {
     <div>
       <NavBar />
       <div>
-        {name ? (
-          dataTwo ? (
-            <PageToView
-              data={dataTwo}
-              frontPageImageClicked={smallImageClicked}
-            />
-          ) : (
-            <div>Loading...</div>
-          )
+        {product ? (
+          <StorePage data={dataTwo} clickedImage={product} />
+        ) : name ? (
+          <PageToView data={dataTwo} />
         ) : (
-          <DefaultPage
-            data={dataOne}
-            dataTwo={dataTwo}
-            setSmallImageClicked={setSmallImageClicked}
-          />
+          <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}
       </div>
       <Footer />

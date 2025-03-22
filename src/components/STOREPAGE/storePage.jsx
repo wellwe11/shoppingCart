@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import classes from "./storePage.module.scss";
 import starImage from "./rating.png";
+import { useNavigate } from "react-router-dom";
 
 const ProductInfo = ({ data }) => {
   const [fetchedData, setFetchedData] = useState(null);
@@ -26,7 +27,7 @@ const ProductInfo = ({ data }) => {
   );
 };
 
-const StorePageOne = ({ fetchedData, setClickedImage }) => {
+const StorePageOne = ({ fetchedData }) => {
   // ref for effect below
   const elementsRef = useRef([]);
 
@@ -50,6 +51,12 @@ const StorePageOne = ({ fetchedData, setClickedImage }) => {
     return () => observer.disconnect();
   }, [fetchedData]);
 
+  const navigate = useNavigate();
+
+  const handleNavigate = (link) => {
+    navigate(`/store/${link}`);
+  };
+
   return (
     <div className={classes.storePage}>
       <div className={classes.imagesContainer}>
@@ -58,7 +65,7 @@ const StorePageOne = ({ fetchedData, setClickedImage }) => {
             className={classes.imageWrapper}
             key={index}
             ref={(el) => (elementsRef.current[index] = el)}
-            onClick={() => setClickedImage(index)}
+            onClick={() => handleNavigate(index)}
           >
             <img src={image.images[0]} alt="" />
             <div className={classes.imageInfo}>
@@ -84,12 +91,12 @@ const StorePageOne = ({ fetchedData, setClickedImage }) => {
   );
 };
 
-const StorePage = ({ data, frontPageImageClicked }) => {
+const StorePage = ({ data, clickedImage }) => {
   const [fetchedData, setFetchedData] = useState(data);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [clickedImage, setClickedImage] = useState(frontPageImageClicked);
+  console.log(data);
 
   useEffect(() => {
     setFetchedData(data);
@@ -112,12 +119,7 @@ const StorePage = ({ data, frontPageImageClicked }) => {
   return (
     <>
       <ProductInfo data={fetchedData.products[clickedImage]} />
-      {!loading && (
-        <StorePageOne
-          setClickedImage={setClickedImage}
-          fetchedData={fetchedData}
-        />
-      )}
+      {!loading && <StorePageOne fetchedData={fetchedData} />}
     </>
   );
 };

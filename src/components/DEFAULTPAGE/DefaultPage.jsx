@@ -5,7 +5,7 @@ import React from "react";
 import { SvgArrowLeft, SvgArrowRight } from "./svgArrows";
 import { useNavigate } from "react-router-dom";
 
-const PictureSliderSmall = ({ fetchedData, setSmallImageClicked }) => {
+const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
   // adjust this accordingly to make sure that the iamges are always visible
   let visibleImages = 7;
@@ -60,7 +60,7 @@ const PictureSliderSmall = ({ fetchedData, setSmallImageClicked }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (link) => {
-    navigate(`/${link}`);
+    navigate(`/store/${link}`);
   };
 
   if (!dataFetched) return <div>Loading...</div>;
@@ -90,8 +90,7 @@ const PictureSliderSmall = ({ fetchedData, setSmallImageClicked }) => {
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
                 onClick={() => {
-                  setSmallImageClicked(index);
-                  handleNavigate("./store");
+                  handleNavigate(index);
                 }}
               >
                 <img src={img.images[0]} alt="" />
@@ -306,15 +305,12 @@ const ServiceInformation = () => {
   );
 };
 
-const DefaultPage = ({ data, dataTwo, setSmallImageClicked }) => {
+const DefaultPage = ({ data, dataTwo }) => {
   return (
     <div>
       <PictureSliderBig fetchedData={data} />
       <ProductInformationSection />
-      <PictureSliderSmall
-        fetchedData={dataTwo}
-        setSmallImageClicked={setSmallImageClicked}
-      />
+      <PictureSliderSmall fetchedData={dataTwo} />
       <ServiceInformation />
     </div>
   );

@@ -9,6 +9,11 @@ const routes = [
     errorElement: <ErrorPage />,
   },
   {
+    path: "/store/:product",
+    element: <Profile />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/:name",
     element: <Profile />,
     errorElement: <ErrorPage />,
