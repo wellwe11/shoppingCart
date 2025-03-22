@@ -1,20 +1,9 @@
 import Profile from "./components/PROFILEPAGE/Profile";
 import ErrorPage from "./components/ERRORPAGE/ErrorPage";
-import StorePage from "./components/STOREPAGE/storePage";
 
 const routes = [
   {
-    path: "/",
-    element: <Profile />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/store/:product",
-    element: <Profile />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/:name",
+    path: "/:name?/:product?",
     element: <Profile />,
     errorElement: <ErrorPage />,
   },
