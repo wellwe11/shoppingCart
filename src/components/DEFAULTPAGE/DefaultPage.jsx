@@ -5,7 +5,7 @@ import React from "react";
 import { SvgArrowLeft, SvgArrowRight } from "./svgArrows";
 import { useNavigate } from "react-router-dom";
 
-const PictureSliderSmall = ({ fetchedData }) => {
+const PictureSliderSmall = ({ fetchedData, setSmallImageClicked }) => {
   // set active image to be length of visible images
   // adjust this accordingly to make sure that the iamges are always visible
   let visibleImages = 7;
@@ -15,7 +15,6 @@ const PictureSliderSmall = ({ fetchedData }) => {
   const [data, setData] = useState(null);
   const elementTarget = useRef(null);
   const [elementWidth, setElementWidth] = useState(null);
-  const [clickedImage, setClickedImage] = useState(null);
 
   useEffect(() => {
     setData(fetchedData.products);
@@ -60,8 +59,8 @@ const PictureSliderSmall = ({ fetchedData }) => {
 
   const navigate = useNavigate();
 
-  const handleNavigate = (e) => {
-    navigate(`./store/product=${e}`);
+  const handleNavigate = (link) => {
+    navigate(`/${link}`);
   };
 
   if (!dataFetched) return <div>Loading...</div>;
@@ -90,7 +89,10 @@ const PictureSliderSmall = ({ fetchedData }) => {
                 key={index}
                 className={classes.pictureSliderImage}
                 ref={elementTarget}
-                onClick={() => handleNavigate(index)}
+                onClick={() => {
+                  setSmallImageClicked(index);
+                  handleNavigate("./store");
+                }}
               >
                 <img src={img.images[0]} alt="" />
               </div>
@@ -304,12 +306,15 @@ const ServiceInformation = () => {
   );
 };
 
-const DefaultPage = ({ data, dataTwo }) => {
+const DefaultPage = ({ data, dataTwo, setSmallImageClicked }) => {
   return (
     <div>
       <PictureSliderBig fetchedData={data} />
       <ProductInformationSection />
-      <PictureSliderSmall fetchedData={dataTwo} />
+      <PictureSliderSmall
+        fetchedData={dataTwo}
+        setSmallImageClicked={setSmallImageClicked}
+      />
       <ServiceInformation />
     </div>
   );

@@ -26,29 +26,7 @@ const ProductInfo = ({ data }) => {
   );
 };
 
-const StorePage = ({ data, clickedProduct }) => {
-  const [fetchedData, setFetchedData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [clickedImage, setClickedImage] = useState(null);
-
-  useEffect(() => {
-    setFetchedData(data);
-  }, [data]);
-
-  useEffect(() => {
-    if (typeof fetchedData === "object") {
-      setError(false);
-      setLoading(false);
-    } else {
-      setError(true);
-    }
-  }, [fetchedData]);
-
-  const clickedProduct = (e) => {
-    setClickedImage(e);
-  };
-
+const StorePageOne = ({ fetchedData, setClickedImage }) => {
   // ref for effect below
   const elementsRef = useRef([]);
 
@@ -72,43 +50,75 @@ const StorePage = ({ data, clickedProduct }) => {
     return () => observer.disconnect();
   }, [fetchedData]);
 
-  if (loading) return <div>Loading...</div>;
+  return (
+    <div className={classes.storePage}>
+      <div className={classes.imagesContainer}>
+        {fetchedData.products.map((image, index) => (
+          <div
+            className={classes.imageWrapper}
+            key={index}
+            ref={(el) => (elementsRef.current[index] = el)}
+            onClick={() => setClickedImage(index)}
+          >
+            <img src={image.images[0]} alt="" />
+            <div className={classes.imageInfo}>
+              <div className={classes.imagePrice}>
+                <p>{image.price}</p>
+              </div>
+              <div className={classes.imageRatingWrapper}>
+                <div
+                  className={classes.imageRatingCover}
+                  style={{ marginRight: `-${Number(image.rating) * 40}%` }}
+                ></div>
+                <img
+                  src={starImage}
+                  alt="image rating"
+                  className={classes.imageRating}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const StorePage = ({ data, frontPageImageClicked }) => {
+  const [fetchedData, setFetchedData] = useState(data);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [clickedImage, setClickedImage] = useState(frontPageImageClicked);
+
+  useEffect(() => {
+    setFetchedData(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (data && data.products && data.products.length > 0) {
+      setError(false);
+      setLoading(false);
+    } else {
+      setError(true);
+      console.log("ERROR, FETCHED DATA:", fetchedData, "DATA:", data);
+    }
+  }, [data]);
 
   if (error) return <div>ERROR</div>;
 
+  if (loading) return <div>Loading...</div>;
+
   return (
-    <div className={classes.storePage}>
+    <>
       <ProductInfo data={fetchedData.products[clickedImage]} />
-      <div className={classes.imagesContainer}>
-        {!loading &&
-          fetchedData.products.map((image, index) => (
-            <div
-              className={classes.imageWrapper}
-              key={index}
-              ref={(el) => (elementsRef.current[index] = el)}
-              onClick={() => clickedProduct(index)}
-            >
-              <img src={image.images[0]} alt="" />
-              <div className={classes.imageInfo}>
-                <div className={classes.imagePrice}>
-                  <p>{image.price}</p>
-                </div>
-                <div className={classes.imageRatingWrapper}>
-                  <div
-                    className={classes.imageRatingCover}
-                    style={{ marginRight: `-${Number(image.rating) * 40}%` }}
-                  ></div>
-                  <img
-                    src={starImage}
-                    alt="image rating"
-                    className={classes.imageRating}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
-    </div>
+      {!loading && (
+        <StorePageOne
+          setClickedImage={setClickedImage}
+          fetchedData={fetchedData}
+        />
+      )}
+    </>
   );
 };
 

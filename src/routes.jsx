@@ -13,11 +13,6 @@ const routes = [
     element: <Profile />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/store/product=number",
-    element: <StorePage clickedProduct={number} />,
-    errorElement: <ErrorPage />,
-  },
 ];
 
 export default routes;

@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 import NavBar from "../NAVBAR/navBar";
 import Footer from "../FOOTER/footer";
+
 const pages = {
   cart: CartPage,
   store: StorePage,
@@ -59,6 +60,8 @@ const Profile = () => {
 
   const PageToView = pages[name];
 
+  const [smallImageClicked, setSmallImageClicked] = useState(null);
+
   if (loading) return <div>Loading data...</div>;
 
   if (error) return <div>ERROR</div>;
@@ -68,9 +71,20 @@ const Profile = () => {
       <NavBar />
       <div>
         {name ? (
-          <PageToView data={dataTwo} />
+          dataTwo ? (
+            <PageToView
+              data={dataTwo}
+              frontPageImageClicked={smallImageClicked}
+            />
+          ) : (
+            <div>Loading...</div>
+          )
         ) : (
-          <DefaultPage data={dataOne} dataTwo={dataTwo} />
+          <DefaultPage
+            data={dataOne}
+            dataTwo={dataTwo}
+            setSmallImageClicked={setSmallImageClicked}
+          />
         )}
       </div>
       <Footer />
