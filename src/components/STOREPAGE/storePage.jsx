@@ -5,24 +5,34 @@ import { useNavigate } from "react-router-dom";
 
 const ProductInfo = ({ data }) => {
   const [fetchedData, setFetchedData] = useState(null);
+  const [activeImage, setActiveImage] = useState(1);
 
   useEffect(() => {
     setFetchedData(data);
   }, [data]);
 
+  console.log(fetchedData);
   return (
     <div className={classes.productInfo}>
-      <div className={classes.productText}>
-        {fetchedData && (
-          <p style={{ color: "red" }}>
-            {fetchedData.title}
-            {fetchedData.brand}
-            {fetchedData.description}
-            {fetchedData.returnPolicy}
-            {fetchedData.warrantyInformation}
-          </p>
-        )}
-      </div>
+      {fetchedData && (
+        <>
+          {fetchedData.images.map((image) => (
+            <div className={classes.productImage}>
+              <img src={image} alt="" />
+            </div>
+          ))}
+
+          <div className={classes.productText}>
+            <p style={{ color: "red" }}>
+              {fetchedData.title}
+              {fetchedData.brand}
+              {fetchedData.description}
+              {fetchedData.returnPolicy}
+              {fetchedData.warrantyInformation}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -58,7 +68,7 @@ const StorePageOne = ({ fetchedData }) => {
   };
 
   return (
-    <div className={classes.storePage}>
+    <div className={classes.productsPage}>
       <div className={classes.imagesContainer}>
         {fetchedData.products.map((image, index) => (
           <div
@@ -96,8 +106,6 @@ const StorePage = ({ data, clickedImage }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(data);
-
   useEffect(() => {
     setFetchedData(data);
   }, [data]);
@@ -117,10 +125,10 @@ const StorePage = ({ data, clickedImage }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <>
+    <div className={classes.storePage}>
       <ProductInfo data={fetchedData.products[clickedImage]} />
       {!loading && <StorePageOne fetchedData={fetchedData} />}
-    </>
+    </div>
   );
 };
 

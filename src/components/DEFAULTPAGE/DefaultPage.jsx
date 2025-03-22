@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./defaultPage.module.scss";
 import React from "react";
 
-import { SvgArrowLeft, SvgArrowRight } from "./svgArrows";
 import { useNavigate } from "react-router-dom";
+import NavButton from "../FREECOPONENTS/NavButton";
 
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
@@ -25,19 +25,6 @@ const PictureSliderSmall = ({ fetchedData }) => {
       setDataFetched(true);
     }
   }, [data]);
-
-  const addActiveImage = () => {
-    if (activeImage < data.length && dataFetched) {
-      setActiveImage((prevImg) => prevImg + 1);
-    }
-  };
-
-  const subtractActiveImage = () => {
-    // only allow it to go down back to 6 which is the amount of visible elements
-    if (activeImage > visibleImages && dataFetched) {
-      setActiveImage((prevImg) => prevImg - 1);
-    }
-  };
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
@@ -69,12 +56,14 @@ const PictureSliderSmall = ({ fetchedData }) => {
     <section className={classes.smallPictureSlider}>
       <div className={`${classes.spacer} ${classes.layer1}`}></div>
       <div className={classes.pictureSliderContainer}>
-        <button
-          onClick={subtractActiveImage}
-          className={classes.smallSliderButtons}
-        >
-          <SvgArrowLeft />
-        </button>
+        <NavButton
+          direction="Left"
+          data={data}
+          activeImage={activeImage}
+          setActiveImage={setActiveImage}
+          classes={classes.smallSliderButtons}
+          subtractImages={visibleImages}
+        />
         <div
           style={{
             transform: `translateX(-${
@@ -97,9 +86,14 @@ const PictureSliderSmall = ({ fetchedData }) => {
               </div>
             ))}
         </div>
-        <button onClick={addActiveImage} className={classes.smallSliderButtons}>
-          <SvgArrowRight />
-        </button>
+        <NavButton
+          direction="Right"
+          data={data}
+          activeImage={activeImage}
+          setActiveImage={setActiveImage}
+          classes={classes.smallSliderButtons}
+          addImages={data.length}
+        />
       </div>
     </section>
   );
@@ -125,22 +119,6 @@ const PictureSliderBig = ({ fetchedData }) => {
     }
   }, [data]);
 
-  const addActiveImage = () => {
-    if (activeImage < data.length - 1) {
-      setActiveImage((prevImg) => prevImg + 1);
-    } else {
-      setActiveImage(0);
-    }
-  };
-
-  const subtractActiveImage = () => {
-    if (activeImage >= 1) {
-      setActiveImage((prevImg) => prevImg - 1);
-    } else {
-      setActiveImage(data.length - 1);
-    }
-  };
-
   const handleMouseHoverSliderTrue = () => {
     setMouseHoverSlider(true);
   };
@@ -149,22 +127,26 @@ const PictureSliderBig = ({ fetchedData }) => {
     setMouseHoverSlider(false);
   };
 
-  useEffect(() => {
-    if (!mouseHoverSlider) {
-      const timer = setTimeout(() => {
-        addActiveImage();
-      }, 5000);
+  // useEffect(() => {
+  //   if (!mouseHoverSlider) {
+  //     const timer = setTimeout(() => {
+  //       addActiveImage();
+  //     }, 5000);
 
-      return () => clearTimeout(timer);
-    }
-  });
+  //     return () => clearTimeout(timer);
+  //   }
+  // });
 
   return (
     <section className={classes.bigPictureSLider}>
       <div className={classes.pictureSliderContainer}>
-        <button onClick={subtractActiveImage} className={classes.buttonClicker}>
-          <SvgArrowRight />
-        </button>
+        <NavButton
+          direction="Left"
+          data={data}
+          activeImage={activeImage}
+          setActiveImage={setActiveImage}
+          classes={classes.buttonClicker}
+        />
         <div
           className={classes.pictureSliderWrapper}
           onMouseLeave={handleMouseHoverSliderFalse}
@@ -185,9 +167,13 @@ const PictureSliderBig = ({ fetchedData }) => {
               </React.Fragment>
             ))}
         </div>
-        <button onClick={addActiveImage} className={classes.buttonClicker}>
-          <SvgArrowLeft />
-        </button>
+        <NavButton
+          direction="Right"
+          data={data}
+          activeImage={activeImage}
+          setActiveImage={setActiveImage}
+          classes={classes.buttonClicker}
+        />
       </div>
     </section>
   );

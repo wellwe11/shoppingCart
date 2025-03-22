@@ -1,13 +1,18 @@
 .storePage {
+  display: flex;
+}
+
+.productsPage {
   background-color: white;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 
+  min-width: 50%;
+
   .imagesContainer {
     display: flex;
     justify-content: space-evenly;
-    width: 50%;
 
     flex-wrap: wrap;
 
@@ -92,6 +97,18 @@
 }
 
 .productInfo {
+  min-width: 50%;
+
+  .productImage {
+    width: 300px;
+    height: 300px;
+  }
+
+  .productImage img {
+    width: inherit;
+    height: inherit;
+  }
+
   .productText {
     display: flex;
     justify-content: flex-start;

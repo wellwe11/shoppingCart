@@ -60,8 +60,6 @@ const Profile = () => {
 
   const { product } = useParams();
 
-  console.log(product);
-
   const PageToView = pages[name];
 
   if (loading) return <div>Loading data...</div>;
