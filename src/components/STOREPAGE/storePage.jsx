@@ -2,22 +2,57 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./storePage.module.scss";
 import starImage from "./rating.png";
 import { useNavigate } from "react-router-dom";
+import NavButton from "../FREECOPONENTS/NavButton";
 
 const ProductInfo = ({ data }) => {
   const [fetchedData, setFetchedData] = useState(null);
   const [activeImage, setActiveImage] = useState(1);
 
+  const addActiveImage = () => {
+    if (activeImage < data.length - 1) {
+      setActiveImage((prevImg) => prevImg + 1);
+    } else {
+      setActiveImage(0);
+    }
+  };
+
+  const subtractActiveImage = () => {
+    if (activeImage >= 1) {
+      setActiveImage((prevImg) => prevImg - 1);
+    } else {
+      setActiveImage(data.length - 1);
+    }
+  };
+
   useEffect(() => {
     setFetchedData(data);
   }, [data]);
+
+  // <NavButton
+  //   direction="Left"
+  //   data={data}
+  //   activeImage={activeImage}
+  //   setActiveImage={setActiveImage}
+  //   classes={classes.smallSliderButtons}
+  //   subtractImages={visibleImages}
+  // />;
 
   console.log(fetchedData);
   return (
     <div className={classes.productInfo}>
       {fetchedData && (
         <>
-          {fetchedData.images.map((image) => (
-            <div className={classes.productImage}>
+          <NavButton
+            direction="Left"
+            data={fetchedData}
+            activeImage={activeImage}
+            setActiveImage={setActiveImage}
+            classes={""}
+          />
+          {/* <img src={fetchedData.images[0]} alt="" /> */}
+          <NavButton direction="Right" />
+          {fetchedData.images.map((image, index) => (
+            <div className={classes.productImage} key={index}>
               <img src={image} alt="" />
             </div>
           ))}
