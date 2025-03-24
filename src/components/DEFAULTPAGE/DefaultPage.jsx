@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import NavButton from "../FREECOPONENTS/NavButton";
 
 import blackWatch from "./blackWatch.png";
-import whiteWatch from "./whiteWatch.webp";
+import aboutImageSport from "./aboutImageSport.webp";
+import aboutImageSitting from "./aboutImageSitting.webp";
+import aboutImageParty from "./aboutImageParty.webp";
 
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
@@ -102,6 +104,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
 };
 
 const PictureSliderBig = ({ fetchedData }) => {
+  console.log(fetchedData);
   const [activeImage, setActiveImage] = useState(1);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
@@ -180,6 +183,38 @@ const PictureSliderBig = ({ fetchedData }) => {
           setActiveImage={setActiveImage}
           classes={classes.buttonClicker}
         />
+      </div>
+    </section>
+  );
+};
+
+const AboutImage = ({ link, alt, width, height, text }) => {
+  return (
+    <div
+      className={classes.aboutImage}
+      style={{ width: width, height: height }}
+    >
+      <div className={classes.aboutImageWrapper}>
+        <div className={classes.aboutText}>
+          <p>{text}</p>
+        </div>
+        <img src={link} alt={alt} />
+      </div>
+    </div>
+  );
+};
+
+const PersonalStorySection = () => {
+  const texts = [
+    "asdaslkdjnajksdnajsdasdaslkdjnajksdnajsdasdaslkdjnajksdnajsdasdaslkdjnajksdnajsd",
+  ];
+
+  return (
+    <section>
+      <div>
+        <AboutImage link={aboutImageSport} width={"300px"} text={texts[0]} />
+        <AboutImage link={aboutImageSitting} text={texts[0]} />
+        <AboutImage link={aboutImageParty} text={texts[0]} />
       </div>
     </section>
   );
@@ -278,6 +313,7 @@ const DefaultPage = ({ data, dataTwo }) => {
   return (
     <div>
       <PictureSliderBig fetchedData={data} />
+      <PersonalStorySection />
       <ProductInformationSection />
       <PictureSliderSmall fetchedData={dataTwo} />
       <ServiceInformation />
