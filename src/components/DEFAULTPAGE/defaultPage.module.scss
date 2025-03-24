@@ -158,8 +158,7 @@
     flex-direction: column;
   }
 
-  .firstTextWrapper,
-  .secondTextWrapper {
+  .firstTextWrapper {
     width: 100%;
     min-height: fit-content;
     position: relative;
@@ -184,8 +183,8 @@
     width: 50%;
     left: 0;
 
-    margin-top: 50px;
-    margin-left: 40px;
+    margin-top: 60px;
+    margin-left: 60px;
   }
 
   .firstText p {
@@ -193,6 +192,7 @@
     filter: blur(5px);
     transition: all 0.33s;
     font-size: 22px;
+    font-style: italic;
   }
 
   .firstTextImage {
@@ -323,19 +323,27 @@
   }
 }
 
-.aboutImagesContainer {
-  background-color: black;
+.aboutMeSection {
+  background-color: white;
+  color: black;
+  font-size: 32px;
+  text-align: center;
 
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  h1 {
+    font-weight: 300;
+  }
 
-  .aboutImagesWrapper {
+  .aboutImagesContainer {
     display: flex;
-    justify-content: space-around;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
 
-    cursor: pointer;
+    .aboutImagesWrapper {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
+      cursor: pointer;
+    }
   }
 }

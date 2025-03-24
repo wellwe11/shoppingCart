@@ -1,10 +1,11 @@
 import classes from "./navBar.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import SearchSvg from "./searchSvg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CartIconSVG from "./cartIconSVG";
+import userEvent from "@testing-library/user-event";
 
-const NavButtons = () => {
+const NavButtons = ({ classNameView }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (link) => {
@@ -12,7 +13,7 @@ const NavButtons = () => {
   };
 
   return (
-    <div className={classes.navBarBtns}>
+    <div className={`${classes.navBarBtns} ${classNameView}`}>
       <div className={classes.container}>
         <div className={classes.wrapper}>
           <button
@@ -119,12 +120,65 @@ const Logo = () => {
 };
 
 const NavBar = () => {
+  const elementTarget = useRef();
+  const [menuPos, setMenuPos] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState("down");
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+
+      if (currentScrollPos < prevScrollPos) {
+        setScrollDirection("up");
+      } else {
+        setScrollDirection("down");
+      }
+
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("menu enter screen");
+          setMenuPos(false);
+        } else {
+          console.log("menu is out of view");
+          setMenuPos(true);
+        }
+      });
+    });
+    if (elementTarget.current) {
+      observer.observe(elementTarget.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={classes.navBar}>
       <div className={classes.container}>
-        <Logo />
-        <NavButtons />
+        <Logo ref={elementTarget} />
+        {menuPos ? (
+          <NavButtons
+            classNameView={
+              scrollDirection === "down"
+                ? classes.menuViewOut
+                : classes.menuViewFade
+            }
+          />
+        ) : (
+          <NavButtons classNameView={classes.menuViewIn} />
+        )}
       </div>
+      <div ref={elementTarget} style={{ height: "1px" }}></div>
     </div>
   );
 };

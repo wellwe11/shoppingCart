@@ -199,12 +199,13 @@ const PersonalStorySection = () => {
   };
 
   return (
-    <section>
+    <section className={classes.aboutMeSection}>
+      <h1>Get to know me</h1>
       <div className={classes.aboutImagesContainer}>
         <div className={classes.aboutImagesWrapper}>
           <AboutImage
             link={aboutImageSport}
-            width={"357px"}
+            width={"358px"}
             text={texts.sportText}
           />
           <AboutImage
@@ -214,7 +215,7 @@ const PersonalStorySection = () => {
           />
           <AboutImage
             link={aboutImageParty}
-            width={"357px"}
+            width={"358px"}
             text={texts.partText}
           />
         </div>
@@ -241,7 +242,9 @@ const ProductInformationSection = () => {
       });
     });
 
-    if (textElementsRef.current) observer.observe(textElementsRef.current);
+    if (textElementsRef.current) {
+      observer.observe(textElementsRef.current);
+    }
 
     return () => observer.disconnect();
   }, []);
@@ -253,9 +256,8 @@ const ProductInformationSection = () => {
           <div className={classes.firstTextWrapper}>
             <div className={classes.firstText}>
               <p ref={textElementsRef}>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua -some person
+                Elegantly crafted, packed with smart features. Stay connected,
+                track health, and elevate your style.
               </p>
             </div>
             <div className={classes.firstTextImage}>
