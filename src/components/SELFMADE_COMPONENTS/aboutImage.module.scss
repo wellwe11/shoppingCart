@@ -1,0 +1,56 @@
+.aboutImage {
+  .aboutImageWrapper {
+    max-width: 100%;
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .aboutImageWrapper img {
+    max-width: 100%;
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  .aboutImageWrapper img:hover {
+    filter: blur(2px);
+  }
+
+  .aboutText {
+    transition: all 0.5s ease;
+    max-width: 90%;
+
+    height: auto;
+
+    opacity: 0;
+    color: white;
+
+    z-index: 1;
+
+    font-size: 26px;
+
+    position: absolute;
+    overflow: scroll;
+    max-height: 100%;
+    pointer-events: none;
+  }
+
+  .aboutText p {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .aboutImageWrapper:hover .aboutText {
+    opacity: 1;
+  }
+
+  .viewAbout {
+    opacity: 1;
+  }
+}

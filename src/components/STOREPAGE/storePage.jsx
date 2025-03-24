@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./storePage.module.scss";
 import starImage from "./rating.png";
 import { useNavigate } from "react-router-dom";
-import NavButton from "../FREECOPONENTS/NavButton";
+import NavButton from "../SELFMADE_COMPONENTS/NavButton";
 
 const ProductInfo = ({ data }) => {
   const [fetchedData, setFetchedData] = useState(null);

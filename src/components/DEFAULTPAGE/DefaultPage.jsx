@@ -3,7 +3,8 @@ import classes from "./defaultPage.module.scss";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import NavButton from "../FREECOPONENTS/NavButton";
+import NavButton from "../SELFMADE_COMPONENTS/NavButton";
+import AboutImage from "../SELFMADE_COMPONENTS/AboutImage";
 
 import blackWatch from "./blackWatch.png";
 import aboutImageSport from "./aboutImageSport.webp";
@@ -104,7 +105,6 @@ const PictureSliderSmall = ({ fetchedData }) => {
 };
 
 const PictureSliderBig = ({ fetchedData }) => {
-  console.log(fetchedData);
   const [activeImage, setActiveImage] = useState(1);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
@@ -188,33 +188,36 @@ const PictureSliderBig = ({ fetchedData }) => {
   );
 };
 
-const AboutImage = ({ link, alt, width, height, text }) => {
-  return (
-    <div
-      className={classes.aboutImage}
-      style={{ width: width, height: height }}
-    >
-      <div className={classes.aboutImageWrapper}>
-        <div className={classes.aboutText}>
-          <p>{text}</p>
-        </div>
-        <img src={link} alt={alt} />
-      </div>
-    </div>
-  );
-};
-
 const PersonalStorySection = () => {
-  const texts = [
-    "asdaslkdjnajksdnajsdasdaslkdjnajksdnajsdasdaslkdjnajksdnajsdasdaslkdjnajksdnajsd",
-  ];
+  const texts = {
+    sportText:
+      "I love using it while making sport. It shows my heartbeat, tracks my steps & many more useful things",
+    sittingText:
+      "Nothing beats quick information. I use it to help me navigate my socials and keep my up to date with the latest trends",
+    partText:
+      "Not only do they look nice, but it's helpful if you're out. Quick to find contacts, help me find locations, connect with people",
+  };
 
   return (
     <section>
-      <div>
-        <AboutImage link={aboutImageSport} width={"300px"} text={texts[0]} />
-        <AboutImage link={aboutImageSitting} text={texts[0]} />
-        <AboutImage link={aboutImageParty} text={texts[0]} />
+      <div className={classes.aboutImagesContainer}>
+        <div className={classes.aboutImagesWrapper}>
+          <AboutImage
+            link={aboutImageSport}
+            width={"357px"}
+            text={texts.sportText}
+          />
+          <AboutImage
+            link={aboutImageSitting}
+            width={""}
+            text={texts.sittingText}
+          />
+          <AboutImage
+            link={aboutImageParty}
+            width={"357px"}
+            text={texts.partText}
+          />
+        </div>
       </div>
     </section>
   );

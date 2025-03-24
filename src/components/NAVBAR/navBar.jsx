@@ -120,7 +120,7 @@ const Logo = () => {
 
 const NavBar = () => {
   return (
-    <div className={classes.NavBar}>
+    <div className={classes.navBar}>
       <div className={classes.container}>
         <Logo />
         <NavButtons />
@@ -130,8 +130,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-// header with 3 buttons:
-// Front-page
-// store
-// cart
