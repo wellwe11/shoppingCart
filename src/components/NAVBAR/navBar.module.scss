@@ -161,6 +161,7 @@
     width: fit-content;
 
     min-width: 100px;
+    min-height: 100%;
 
     display: flex;
     justify-content: center;
@@ -184,7 +185,7 @@
   top: 0;
   left: 0;
   opacity: 1;
-  transition: margin-top 0.2s ease;
+  transition: margin-top 0.2s ease-in-out;
 }
 
 .menuViewIn {
