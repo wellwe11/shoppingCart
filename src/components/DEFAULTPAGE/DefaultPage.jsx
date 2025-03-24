@@ -5,6 +5,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import NavButton from "../FREECOPONENTS/NavButton";
 
+import blackWatch from "./blackWatch.png";
+import whiteWatch from "./whiteWatch.webp";
+
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
   // adjust this accordingly to make sure that the iamges are always visible
@@ -54,7 +57,6 @@ const PictureSliderSmall = ({ fetchedData }) => {
 
   return (
     <section className={classes.smallPictureSlider}>
-      <div className={`${classes.spacer} ${classes.layer1}`}></div>
       <div className={classes.pictureSliderContainer}>
         <NavButton
           direction="Left"
@@ -127,15 +129,19 @@ const PictureSliderBig = ({ fetchedData }) => {
     setMouseHoverSlider(false);
   };
 
-  // useEffect(() => {
-  //   if (!mouseHoverSlider) {
-  //     const timer = setTimeout(() => {
-  //       addActiveImage();
-  //     }, 5000);
+  useEffect(() => {
+    if (!mouseHoverSlider) {
+      const timer = setTimeout(() => {
+        if (activeImage < data.length - 1) {
+          setActiveImage((prevImg) => prevImg + 1);
+        } else {
+          setActiveImage(0);
+        }
+      }, 5000);
 
-  //     return () => clearTimeout(timer);
-  //   }
-  // });
+      return () => clearTimeout(timer);
+    }
+  });
 
   return (
     <section className={classes.bigPictureSLider}>
@@ -182,7 +188,6 @@ const PictureSliderBig = ({ fetchedData }) => {
 const ProductInformationSection = () => {
   // ref for effect below
   const textElementsRef = useRef([]);
-  const textElementsRefTwo = useRef([]);
 
   // creates a smooth transition for events to make them look a bit
   // nicer when scrolling
@@ -199,8 +204,6 @@ const ProductInformationSection = () => {
     });
 
     if (textElementsRef.current) observer.observe(textElementsRef.current);
-    if (textElementsRefTwo.current)
-      observer.observe(textElementsRefTwo.current);
 
     return () => observer.disconnect();
   }, []);
@@ -214,44 +217,24 @@ const ProductInformationSection = () => {
               <p ref={textElementsRef}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                sed diam voluptua. At vero eos et accusam et justo duo dolores
-                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet.
+                aliquyam erat, sed diam voluptua -some person
               </p>
             </div>
-          </div>
-          <div className={classes.wave}>
-            <svg
-              data-name="Layer 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
-            </svg>
-          </div>
-          <div className={classes.secondTextWrapper}>
-            <div
-              className={classes.secondText}
-              // ref={(e) => (elementsRef.current = e)}
-            >
-              <p ref={textElementsRefTwo}>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                sed diam voluptua. At vero eos et accusam et justo duo dolores
-                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet.
-              </p>
+            <div className={classes.firstTextImage}>
+              <img src={blackWatch} alt="" className={classes.firstTextImage} />
+            </div>
+            <div className={classes.wave}>
+              <svg
+                data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1200 120"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                  className={classes.shape_fill}
+                ></path>
+              </svg>
             </div>
           </div>
         </div>

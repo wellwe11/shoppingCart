@@ -6,56 +6,52 @@ import NavButton from "../FREECOPONENTS/NavButton";
 
 const ProductInfo = ({ data }) => {
   const [fetchedData, setFetchedData] = useState(null);
-  const [activeImage, setActiveImage] = useState(1);
-
-  const addActiveImage = () => {
-    if (activeImage < data.length - 1) {
-      setActiveImage((prevImg) => prevImg + 1);
-    } else {
-      setActiveImage(0);
-    }
-  };
-
-  const subtractActiveImage = () => {
-    if (activeImage >= 1) {
-      setActiveImage((prevImg) => prevImg - 1);
-    } else {
-      setActiveImage(data.length - 1);
-    }
-  };
+  const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
     setFetchedData(data);
   }, [data]);
 
-  // <NavButton
-  //   direction="Left"
-  //   data={data}
-  //   activeImage={activeImage}
-  //   setActiveImage={setActiveImage}
-  //   classes={classes.smallSliderButtons}
-  //   subtractImages={visibleImages}
-  // />;
+  console.log(activeImage);
 
   console.log(fetchedData);
   return (
     <div className={classes.productInfo}>
       {fetchedData && (
         <>
-          <NavButton
-            direction="Left"
-            data={fetchedData}
-            activeImage={activeImage}
-            setActiveImage={setActiveImage}
-            classes={""}
-          />
-          {/* <img src={fetchedData.images[0]} alt="" /> */}
-          <NavButton direction="Right" />
-          {fetchedData.images.map((image, index) => (
-            <div className={classes.productImage} key={index}>
-              <img src={image} alt="" />
+          <div className={classes.productImagesContainer}>
+            <div className={classes.smallImagesContainer}>
+              {fetchedData.images.map((image, index) => (
+                <div
+                  className={classes.productImagesSmall}
+                  key={index}
+                  onClick={() => setActiveImage(index)}
+                  style={{
+                    border: index === activeImage ? "1px solid white" : "",
+                  }}
+                >
+                  <img src={image} alt="" />
+                </div>
+              ))}
             </div>
-          ))}
+            <NavButton
+              direction="Left"
+              data={fetchedData.images}
+              activeImage={activeImage}
+              setActiveImage={setActiveImage}
+              classes={classes.productImageButtons}
+            />
+            <div className={classes.productImage}>
+              <img src={fetchedData.images[activeImage]} alt="" />
+            </div>
+            <NavButton
+              direction="Right"
+              data={fetchedData.images}
+              activeImage={activeImage}
+              setActiveImage={setActiveImage}
+              classes={classes.productImageButtons}
+            />
+          </div>
 
           <div className={classes.productText}>
             <p style={{ color: "red" }}>

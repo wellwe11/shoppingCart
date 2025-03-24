@@ -9,6 +9,7 @@
   align-items: center;
 
   min-width: 50%;
+  max-width: 50%;
 
   .imagesContainer {
     display: flex;
@@ -98,10 +99,33 @@
 
 .productInfo {
   min-width: 50%;
+  height: 500px;
+  background-color: orange;
+
+  .productImagesContainer {
+    display: flex;
+  }
+
+  .smallImagesContainer {
+    display: flex;
+    flex-direction: column;
+  }
 
   .productImage {
     width: 300px;
     height: 300px;
+  }
+
+  .productImagesSmall {
+    height: 100px;
+    width: 100px;
+
+    cursor: pointer;
+  }
+
+  .productImagesSmall img {
+    width: inherit;
+    height: inherit;
   }
 
   .productImage img {
@@ -116,5 +140,13 @@
 
     height: 100px;
     width: 400px;
+  }
+
+  .productImageButtons {
+  }
+
+  .productImageButtons svg {
+    /*removes svg animation*/
+    margin: 0 !important;
   }
 }

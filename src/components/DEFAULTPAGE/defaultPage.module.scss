@@ -83,7 +83,6 @@
     width: 100%;
     height: 200px;
     max-width: 1200px;
-    margin-top: -100px;
 
     display: flex;
     justify-content: center;
@@ -137,9 +136,6 @@
     background-position: center;
     background-size: cover;
   }
-  .layer1 {
-    background-image: url(./layered-waves-haikei.svg);
-  }
 }
 
 .ProductInformationSection {
@@ -155,6 +151,7 @@
 
   .introSectionText {
     min-height: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,51 +161,57 @@
   .firstTextWrapper,
   .secondTextWrapper {
     width: 100%;
-    height: 100%;
-
-    height: 200px;
-
-    display: flex;
-    align-items: center;
+    min-height: fit-content;
+    position: relative;
+    overflow: hidden;
   }
 
   .firstTextWrapper {
-    background-color: black;
-    color: white;
-  }
-
-  .secondTextWrapper {
     background-color: white;
     color: black;
+    max-height: 300px;
 
-    justify-content: flex-end;
+    position: relative;
   }
 
   .firstText {
-    min-height: 20%;
-    width: 50%;
-
-    margin-left: 2%;
-    margin-bottom: -10%;
-
+    height: fit-content;
     z-index: 1;
+    position: absolute;
   }
 
-  .secondText {
-    min-height: 20%;
+  .firstText {
     width: 50%;
+    left: 0;
 
-    margin-right: 5%;
-    margin-bottom: 5%;
-
-    z-index: 1;
+    margin-top: 50px;
+    margin-left: 40px;
   }
 
-  .firstText p,
-  .secondText p {
+  .firstText p {
     opacity: 0;
     filter: blur(5px);
     transition: all 0.33s;
+    font-size: 22px;
+  }
+
+  .firstTextImage {
+    position: relative;
+    align-self: flex-start;
+  }
+
+  .firstTextImage img {
+    height: 800px;
+    width: 800px;
+    position: absolute;
+    margin-top: -200px;
+    margin-right: -100px;
+    transform: rotateY(180deg);
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .show {
@@ -217,20 +220,21 @@
   }
 
   .wave {
-    min-width: 100%;
-    height: 200px;
+    width: 100%;
     overflow: hidden;
     line-height: 0;
-    transform: rotate(180deg);
-
-    background-color: white;
+    transform: rotateY(180deg);
+    margin-top: 200px;
   }
 
   .wave svg {
-    position: relative;
     display: block;
-    width: calc(174% + 1.3px);
-    height: 202px;
+    width: calc(169% + 1.3px);
+    height: 200px;
+  }
+
+  .wave .shape_fill {
+    fill: black;
   }
 }
 
