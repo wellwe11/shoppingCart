@@ -1,6 +1,8 @@
 .navBar {
   background-color: black;
   .container {
+    position: relative;
+    max-width: 1440px;
     height: 110px;
     width: 100%;
     color: white;
