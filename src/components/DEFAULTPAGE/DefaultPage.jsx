@@ -372,7 +372,6 @@ const ServiceInformation = () => {
           <p>{promisePhrases[activePage]}</p>
         </div>
       </div>
-      <div className={`${classes.spacer} ${classes.layer1}`}></div>
     </section>
   );
 };
