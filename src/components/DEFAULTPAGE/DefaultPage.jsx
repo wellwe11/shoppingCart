@@ -188,8 +188,12 @@ const PictureSliderBig = ({ fetchedData }) => {
   );
 };
 
-const PersonalStorySection = () => {
-  const [header, setHeader] = useState(0);
+const PersonalSectionText = () => {
+  const [header, setHeader] = useState(1);
+
+  const handleHeader = (e) => {
+    setHeader(e);
+  };
 
   const headers = [
     "Get to know me",
@@ -198,18 +202,43 @@ const PersonalStorySection = () => {
     "Get to be me",
   ];
 
+  const texts = [
+    ` as you explore the future of style. `,
+    ` with every seamless detail. `,
+    ` shine in every moment. `,
+    ` , always ahead of the curve. Innovation, elegance, and technology—woven into every second, crafted for those who dare to stand out.`,
+  ];
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (header < headers.length - 1) {
+      if (header < texts.length - 1) {
         setHeader((prevHead) => prevHead + 1);
       } else {
         setHeader(0);
       }
-    }, 1000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [header]);
 
+  // const parts = text.split(new RegExp(`(${headers.join("|")})`, "g"));
+  // console.log(parts);
+
+  return (
+    <p style={{ color: "gray" }}>
+      {texts.map((text, index) => (
+        <>
+          <span style={{ color: index === header ? "black" : "gray" }}>
+            {headers[index]}
+          </span>
+          {text}
+        </>
+      ))}
+    </p>
+  );
+};
+
+const PersonalStorySection = () => {
   const texts = {
     sportText:
       "I love using it while making sport. It shows my heartbeat, tracks my steps & many more useful things",
@@ -221,8 +250,9 @@ const PersonalStorySection = () => {
 
   return (
     <section className={classes.aboutMeSection}>
-      <h1>{headers[header]}</h1>
-
+      <h3>Who am I?</h3>
+      <PersonalSectionText />
+      {/* <p style={{ color: "gray" }}>{text}</p> */}
       <div className={classes.aboutImagesContainer}>
         <div className={classes.aboutImagesWrapper}>
           <AboutImage

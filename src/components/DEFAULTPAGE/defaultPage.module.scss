@@ -326,11 +326,14 @@
 .aboutMeSection {
   background-color: white;
   color: black;
-  font-size: 32px;
+  font-size: 23px;
   text-align: start;
 
-  h1 {
+  p {
+    font-size: 24px;
     font-weight: 300;
+    justify-content: space-around;
+    max-width: 500px;
   }
 
   .aboutImagesContainer {
