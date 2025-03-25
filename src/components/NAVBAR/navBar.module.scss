@@ -137,6 +137,8 @@
   position: absolute;
   height: 60px;
   width: 100%;
+  margin-top: 160px;
+
   background-color: white;
 
   display: flex;
@@ -144,6 +146,8 @@
   align-items: center;
 
   z-index: 1000;
+
+  transition: opacity 0.2s ease-in-out;
 
   .container {
     display: flex;
@@ -185,13 +189,12 @@
   top: 0;
   left: 0;
   opacity: 1;
-  transition: margin-top 0.2s ease-in-out;
-}
 
-.menuViewIn {
-  margin-bottom: -170px;
+  border-bottom: 1px solid black;
+  margin-top: 0px;
 }
 
 .menuViewFade {
-  margin-top: -100px;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
 }

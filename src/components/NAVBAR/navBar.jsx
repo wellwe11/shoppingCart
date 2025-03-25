@@ -100,14 +100,14 @@ const NavIcons = () => {
   );
 };
 
-const Logo = () => {
+const Logo = ({ ref }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (link) => {
     navigate(`/${link}`);
   };
   return (
-    <div className={classes.logo}>
+    <div className={classes.logo} ref={ref}>
       <NavIcons />
       <div className={classes.container}>
         <div className={classes.wrapper}>
@@ -121,9 +121,32 @@ const Logo = () => {
 
 const NavBar = () => {
   const elementTarget = useRef();
-  const [menuPos, setMenuPos] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState("down");
+  const elementTargetTwo = useRef();
+  const [navButtonClass, setNavButtonClass] = useState("");
+  const [navButtonarea, setNavButtonArea] = useState("top");
+  const [navButtonTop, setNavButtonTop] = useState(true);
+  const [scrollDirection, setScrollDirection] = useState(null);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+
+  useEffect(() => {
+    if (navButtonTop) {
+      setNavButtonClass("");
+    } else if (!navButtonTop && navButtonarea === "halfTop") {
+      setNavButtonClass(`${`${classes.menuViewOut}`}`);
+    } else if (
+      !navButtonTop &&
+      navButtonarea === "out" &&
+      scrollDirection === "down"
+    ) {
+      setNavButtonClass(`${`${classes.menuViewFade}`}`);
+    } else if (
+      !navButtonTop &&
+      navButtonarea === "out" &&
+      scrollDirection === "up"
+    ) {
+      setNavButtonClass(`${`${classes.menuViewOut}`}`);
+    }
+  }, [navButtonarea, scrollDirection, navButtonTop]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -147,38 +170,53 @@ const NavBar = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("menu enter screen");
-          setMenuPos(false);
-        } else {
-          console.log("menu is out of view");
-          setMenuPos(true);
+          if (entry.target === elementTarget.current) {
+            setNavButtonTop(true);
+          }
+
+          if (entry.target === elementTargetTwo.current) {
+            setNavButtonArea("halfTop");
+          }
+        }
+
+        if (!entry.isIntersecting) {
+          if (entry.target === elementTarget.current) {
+            setNavButtonTop(false);
+          }
+
+          if (entry.target === elementTargetTwo.current) {
+            setNavButtonArea("out");
+          }
         }
       });
     });
-    if (elementTarget.current) {
-      observer.observe(elementTarget.current);
-    }
 
-    return () => observer.disconnect();
+    if (elementTarget.current) observer.observe(elementTarget.current);
+    if (elementTargetTwo.current) observer.observe(elementTargetTwo.current);
+
+    return () => {
+      if (elementTarget.current) observer.unobserve(elementTarget.current);
+      if (elementTargetTwo.current)
+        observer.unobserve(elementTargetTwo.current);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <div className={classes.navBar}>
       <div className={classes.container}>
         <Logo ref={elementTarget} />
-        {menuPos ? (
-          <NavButtons
-            classNameView={
-              scrollDirection === "down"
-                ? classes.menuViewOut
-                : classes.menuViewFade
-            }
-          />
-        ) : (
-          <NavButtons classNameView={classes.menuViewIn} />
-        )}
+        <NavButtons classNameView={navButtonClass} />
       </div>
-      <div ref={elementTarget} style={{ height: "1px" }}></div>
+      <div
+        ref={elementTargetTwo}
+        style={{
+          height: "30px",
+          width: "30px",
+          position: "absolute",
+          marginTop: "300px",
+        }}
+      ></div>
     </div>
   );
 };

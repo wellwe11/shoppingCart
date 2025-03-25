@@ -189,6 +189,27 @@ const PictureSliderBig = ({ fetchedData }) => {
 };
 
 const PersonalStorySection = () => {
+  const [header, setHeader] = useState(0);
+
+  const headers = [
+    "Get to know me",
+    "Get to love me",
+    "Get to see me",
+    "Get to be me",
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (header < headers.length - 1) {
+        setHeader((prevHead) => prevHead + 1);
+      } else {
+        setHeader(0);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [header]);
+
   const texts = {
     sportText:
       "I love using it while making sport. It shows my heartbeat, tracks my steps & many more useful things",
@@ -200,7 +221,8 @@ const PersonalStorySection = () => {
 
   return (
     <section className={classes.aboutMeSection}>
-      <h1>Get to know me</h1>
+      <h1>{headers[header]}</h1>
+
       <div className={classes.aboutImagesContainer}>
         <div className={classes.aboutImagesWrapper}>
           <AboutImage
