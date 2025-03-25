@@ -191,10 +191,6 @@ const PictureSliderBig = ({ fetchedData }) => {
 const PersonalSectionText = () => {
   const [header, setHeader] = useState(1);
 
-  const handleHeader = (e) => {
-    setHeader(e);
-  };
-
   const headers = [
     "Get to know me",
     "Get to love me",
@@ -206,7 +202,7 @@ const PersonalSectionText = () => {
     ` as you explore the future of style. `,
     ` with every seamless detail. `,
     ` shine in every moment. `,
-    ` , always ahead of the curve. Innovation, elegance, and technology—woven into every second, crafted for those who dare to stand out.`,
+    `, always ahead of the curve. Innovation, elegance, and technology, woven into every second, crafted for those who dare to stand out.`,
   ];
 
   useEffect(() => {
@@ -221,20 +217,34 @@ const PersonalSectionText = () => {
     return () => clearTimeout(timer);
   }, [header]);
 
-  // const parts = text.split(new RegExp(`(${headers.join("|")})`, "g"));
-  // console.log(parts);
-
   return (
-    <p style={{ color: "gray" }}>
-      {texts.map((text, index) => (
-        <>
-          <span style={{ color: index === header ? "black" : "gray" }}>
-            {headers[index]}
-          </span>
-          {text}
-        </>
-      ))}
-    </p>
+    <div className={classes.aboutMeText}>
+      <p style={{ color: "gray" }}>
+        {texts.map((text, index) => (
+          <>
+            <span className={index === header ? classes.indexAsHeader : ""}>
+              {headers[index]}
+            </span>
+            {text}
+          </>
+        ))}
+      </p>
+    </div>
+  );
+};
+
+const PersonalSelectionProductsButton = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/store/`);
+  };
+  return (
+    <div className={classes.personSelectionButton}>
+      <button onClick={handleNavigate}>
+        <p>Explore our collection ></p>
+      </button>
+    </div>
   );
 };
 
@@ -250,9 +260,10 @@ const PersonalStorySection = () => {
 
   return (
     <section className={classes.aboutMeSection}>
-      <h3>Who am I?</h3>
-      <PersonalSectionText />
-      {/* <p style={{ color: "gray" }}>{text}</p> */}
+      <div className={classes.exploreMoreArea}>
+        <PersonalSectionText />
+        <PersonalSelectionProductsButton />
+      </div>
       <div className={classes.aboutImagesContainer}>
         <div className={classes.aboutImagesWrapper}>
           <AboutImage
