@@ -110,6 +110,15 @@ const PictureSliderBig = ({ fetchedData }) => {
   const [dataFetched, setDataFetched] = useState(false);
   const [data, setData] = useState(null);
 
+  const sliderTexts = [
+    "A smartwatch isn't just about time. It's about making the most of it",
+    "Track your goals, stay connected, and redefine what's possible",
+    "Smart technology, smarter living. Wear the future on your wrist",
+    "Your journey to a healthier, more connected life starts with a smartwatch",
+    "More than a watch. Your personal coach, assistant, and motivator",
+    "Stay ahead, stay active, stay in control. Right from your wrist",
+  ];
+
   useEffect(() => {
     const fetchedPhotos = fetchedData.photos.filter(
       (img, index) => index > 10 && index < 17 && img.width > 4000
