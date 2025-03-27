@@ -179,6 +179,7 @@ const PictureSliderBig = ({ fetchedData }) => {
                       ? classes.pictureSliderImageInView
                       : classes.pictureSliderImageOutView
                   }`}
+                  key={index}
                 >
                   <img src={img.src.landscape} alt={img.src.alt} />
                 </div>
@@ -230,12 +231,12 @@ const PersonalSectionText = () => {
     <div className={classes.aboutMeText}>
       <p style={{ color: "gray" }}>
         {texts.map((text, index) => (
-          <>
+          <React.Fragment key={index}>
             <span className={index === header ? classes.indexAsHeader : ""}>
               {headers[index]}
             </span>
             {text}
-          </>
+          </React.Fragment>
         ))}
       </p>
     </div>

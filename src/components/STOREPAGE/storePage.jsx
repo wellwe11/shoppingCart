@@ -65,9 +65,17 @@ const ProductInfo = ({ data }) => {
   );
 };
 
-const StorePageOne = ({ fetchedData }) => {
+const StorePageOne = ({ fetchedData, clickedImage }) => {
   // ref for effect below
   const elementsRef = useRef([]);
+  const [page, setPage] = useState(0);
+  const [data, setData] = useState(fetchedData.products);
+  const [dataIsFetched, setDataIsFetched] = useState(false);
+
+  useEffect(() => {
+    setData(fetchedData.products);
+    setDataIsFetched(true);
+  }, [fetchedData]);
 
   // creates a smooth transition for events to make them look a bit
   // nicer when scrolling
@@ -95,7 +103,27 @@ const StorePageOne = ({ fetchedData }) => {
     navigate(`/store/${link}`);
   };
 
-  const [page, setPage] = useState(0);
+  let productsToViewUpTo = page > 0 ? page * 4 : 3;
+  let productsToViewDownTo = productsToViewUpTo - 3;
+  let clickedImagePage = Math.floor(clickedImage / 4);
+
+  useEffect(() => {
+    if (!isNaN(clickedImagePage)) {
+      setPage(clickedImagePage);
+    }
+  }, [clickedImagePage]);
+
+  console.log(
+    "clickedImage:",
+    clickedImage,
+    "productsToViewUpTo: ",
+    productsToViewUpTo,
+    "productsToViewDownTo: ",
+    productsToViewDownTo,
+    "clickedImagePage: ",
+    clickedImagePage,
+    page
+  );
 
   const handleShowProductsPlus = () => {
     setShowProducts((prevProducts) => prevProducts + 1);
@@ -105,39 +133,43 @@ const StorePageOne = ({ fetchedData }) => {
     setShowProducts((prevProducts) => prevProducts - 1);
   };
 
+  // console.log(Math.floor(clickedImage / 4));
+
   return (
     <div className={classes.productsPage}>
       <div className={classes.imagesContainer}>
-        {fetchedData.products.map((image, index) => (
-          <>
-            {index <= page + 3 && (
-              <div
-                className={classes.imageWrapper}
-                key={index}
-                ref={(el) => (elementsRef.current[index] = el)}
-                onClick={() => handleNavigate(index)}
-              >
-                <img src={image.images[0]} alt="" />
-                <div className={classes.imageInfo}>
-                  <div className={classes.imagePrice}>
-                    <p>{image.price}</p>
-                  </div>
-                  <div className={classes.imageRatingWrapper}>
-                    <div
-                      className={classes.imageRatingCover}
-                      style={{ marginRight: `-${Number(image.rating) * 40}%` }}
-                    ></div>
-                    <img
-                      src={starImage}
-                      alt="image rating"
-                      className={classes.imageRating}
-                    />
-                  </div>
+        {fetchedData.products.map((image, index) =>
+          index <= productsToViewUpTo && index >= productsToViewDownTo ? (
+            <div
+              className={classes.imageWrapper}
+              key={index}
+              ref={(el) => (elementsRef.current[index] = el)}
+              onClick={() => handleNavigate(index)}
+            >
+              <img src={image.images[0]} alt="" />
+              <div className={classes.imageInfo}>
+                <div className={classes.imagePrice}>
+                  <p>{image.price}</p>
+                </div>
+                <div className={classes.imageRatingWrapper}>
+                  <div
+                    className={classes.imageRatingCover}
+                    style={{
+                      marginRight: `-${Number(image.rating) * 40}%`,
+                    }}
+                  ></div>
+                  <img
+                    src={starImage}
+                    alt="image rating"
+                    className={classes.imageRating}
+                  />
                 </div>
               </div>
-            )}
-          </>
-        ))}
+            </div>
+          ) : (
+            ""
+          )
+        )}
       </div>
     </div>
   );
@@ -169,7 +201,9 @@ const StorePage = ({ data, clickedImage }) => {
   return (
     <div className={classes.storePage}>
       <ProductInfo data={fetchedData.products[clickedImage]} />
-      {!loading && <StorePageOne fetchedData={fetchedData} />}
+      {!loading && (
+        <StorePageOne fetchedData={fetchedData} clickedImage={clickedImage} />
+      )}
     </div>
   );
 };
