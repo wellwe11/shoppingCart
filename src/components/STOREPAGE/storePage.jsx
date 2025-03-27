@@ -103,27 +103,16 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
     navigate(`/store/${link}`);
   };
 
-  let productsToViewUpTo = page > 0 ? page * 4 : 3;
-  let productsToViewDownTo = productsToViewUpTo - 3;
   let clickedImagePage = Math.floor(clickedImage / 4);
+
+  let productsToViewDownTo = clickedImagePage ? clickedImagePage * 4 : 0;
+  let productsToViewUpTo = productsToViewDownTo + 3;
 
   useEffect(() => {
     if (!isNaN(clickedImagePage)) {
       setPage(clickedImagePage);
     }
-  }, [clickedImagePage]);
-
-  console.log(
-    "clickedImage:",
-    clickedImage,
-    "productsToViewUpTo: ",
-    productsToViewUpTo,
-    "productsToViewDownTo: ",
-    productsToViewDownTo,
-    "clickedImagePage: ",
-    clickedImagePage,
-    page
-  );
+  }, []);
 
   const handleShowProductsPlus = () => {
     setShowProducts((prevProducts) => prevProducts + 1);
