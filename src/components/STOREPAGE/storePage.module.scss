@@ -99,11 +99,28 @@
 
 .productInfo {
   min-width: 50%;
-  height: 500px;
-  background-color: orange;
+  position: relative;
+  background-color: white;
 
   .productImagesContainer {
+    margin-top: 60px;
     display: flex;
+  }
+
+  .productInfoFixed {
+    position: fixed;
+    margin-top: -165px;
+  }
+
+  .productInfoEnd {
+    position: absolute;
+    bottom: 0;
+    margin-top: 90%;
+  }
+
+  .refDivTriggerTwo {
+    position: absolute;
+    bottom: 0;
   }
 
   .smallImagesContainer {

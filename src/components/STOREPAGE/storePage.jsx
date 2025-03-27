@@ -12,13 +12,10 @@ const ProductInfo = ({ data }) => {
     setFetchedData(data);
   }, [data]);
 
-  console.log(activeImage);
-
-  console.log(fetchedData);
   return (
     <div className={classes.productInfo}>
       {fetchedData && (
-        <>
+        <div>
           <div className={classes.productImagesContainer}>
             <div className={classes.smallImagesContainer}>
               {fetchedData.images.map((image, index) => (
@@ -62,7 +59,7 @@ const ProductInfo = ({ data }) => {
               {fetchedData.warrantyInformation}
             </p>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
@@ -98,34 +95,48 @@ const StorePageOne = ({ fetchedData }) => {
     navigate(`/store/${link}`);
   };
 
+  const [page, setPage] = useState(0);
+
+  const handleShowProductsPlus = () => {
+    setShowProducts((prevProducts) => prevProducts + 1);
+  };
+
+  const handleShowProductsMinus = () => {
+    setShowProducts((prevProducts) => prevProducts - 1);
+  };
+
   return (
     <div className={classes.productsPage}>
       <div className={classes.imagesContainer}>
         {fetchedData.products.map((image, index) => (
-          <div
-            className={classes.imageWrapper}
-            key={index}
-            ref={(el) => (elementsRef.current[index] = el)}
-            onClick={() => handleNavigate(index)}
-          >
-            <img src={image.images[0]} alt="" />
-            <div className={classes.imageInfo}>
-              <div className={classes.imagePrice}>
-                <p>{image.price}</p>
+          <>
+            {index <= page + 3 && (
+              <div
+                className={classes.imageWrapper}
+                key={index}
+                ref={(el) => (elementsRef.current[index] = el)}
+                onClick={() => handleNavigate(index)}
+              >
+                <img src={image.images[0]} alt="" />
+                <div className={classes.imageInfo}>
+                  <div className={classes.imagePrice}>
+                    <p>{image.price}</p>
+                  </div>
+                  <div className={classes.imageRatingWrapper}>
+                    <div
+                      className={classes.imageRatingCover}
+                      style={{ marginRight: `-${Number(image.rating) * 40}%` }}
+                    ></div>
+                    <img
+                      src={starImage}
+                      alt="image rating"
+                      className={classes.imageRating}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className={classes.imageRatingWrapper}>
-                <div
-                  className={classes.imageRatingCover}
-                  style={{ marginRight: `-${Number(image.rating) * 40}%` }}
-                ></div>
-                <img
-                  src={starImage}
-                  alt="image rating"
-                  className={classes.imageRating}
-                />
-              </div>
-            </div>
-          </div>
+            )}
+          </>
         ))}
       </div>
     </div>

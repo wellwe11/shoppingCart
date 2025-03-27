@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchSvg from "./searchSvg";
 import { useEffect, useRef, useState } from "react";
 import CartIconSVG from "./cartIconSVG";
-import userEvent from "@testing-library/user-event";
 
 const NavButtons = ({ classNameView }) => {
   const navigate = useNavigate();

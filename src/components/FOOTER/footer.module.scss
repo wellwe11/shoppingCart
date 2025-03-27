@@ -5,15 +5,18 @@
 
   background-color: white;
   color: black;
-  height: 200px;
+  min-height: 200px;
 
   h2 {
     width: 330px;
+    padding: 10px;
+    font-size: large;
   }
 
   h5 {
     width: 300px;
     color: rgba(0, 0, 0, 0.767);
+    padding: 10px;
   }
 
   .newsLetterWrapper {
@@ -27,6 +30,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding: 10px;
 
     input {
       height: 50px;
@@ -54,6 +59,20 @@
       background-color: rgba(0, 0, 0, 0.81);
     }
   }
+
+  @media screen and (max-width: 1050px) {
+    .newsLetterWrapper {
+      justify-content: space-evenly;
+    }
+
+    h2 {
+      font-size: medium;
+    }
+
+    h5 {
+      display: none;
+    }
+  }
 }
 
 .footer {
@@ -62,7 +81,7 @@
     color: white;
 
     display: flex;
-    height: 250px;
+    min-height: 250px;
     padding: 10px;
   }
 }
