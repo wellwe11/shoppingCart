@@ -87,8 +87,6 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
     // console.log(page);
   }, [page]);
 
-  console.log(fetchedPageProducts);
-
   // creates a smooth transition for events to make them look a bit
   // nicer when scrolling
   useEffect(() => {
@@ -114,6 +112,8 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
   const handleNavigate = (link) => {
     navigate(`/store/${link}`);
   };
+
+  console.log(fetchedPageProducts);
 
   return (
     <div className={classes.productsPage}>
@@ -151,17 +151,17 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
         pages={fetchedData.products}
         page={page}
         setPage={setPage}
+        data={fetchedPageProducts}
       />
     </div>
   );
 };
 
-const StorePageButtons = ({ pages, page, setPage }) => {
+const StorePageButtons = ({ pages, page, setPage, data }) => {
   const amountOfPages = Math.floor(pages.length / 4) + 1;
   const startPage = page + 1;
 
   // add a limit to NavButton so that it functions correctly (it needs data to setpage etc)
-  let data = pages.slice(0, 3);
 
   return (
     <div className={classes.storePageButtons}>
