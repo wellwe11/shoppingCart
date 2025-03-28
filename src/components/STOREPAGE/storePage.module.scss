@@ -5,6 +5,7 @@
 .productsPage {
   background-color: white;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: center;
 
@@ -99,23 +100,11 @@
 
 .productInfo {
   min-width: 50%;
-  position: relative;
   background-color: white;
 
   .productImagesContainer {
     margin-top: 60px;
     display: flex;
-  }
-
-  .productInfoFixed {
-    position: fixed;
-    margin-top: -165px;
-  }
-
-  .productInfoEnd {
-    position: absolute;
-    bottom: 0;
-    margin-top: 90%;
   }
 
   .refDivTriggerTwo {
@@ -165,5 +154,29 @@
   .productImageButtons svg {
     /*removes svg animation*/
     margin: 0 !important;
+  }
+}
+
+.storePageButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: orange;
+
+  .buttonStyle {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buttonStyle svg {
+    max-height: 30px;
+    max-width: 30px;
+    margin: 0;
+  }
+
+  .buttonStyle button {
   }
 }

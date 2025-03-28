@@ -1,13 +1,13 @@
 import { SvgArrowLeft, SvgArrowRight } from "./svgArrows";
 
 const NavButton = ({
-  direction,
-  data,
-  activeImage,
-  setActiveImage,
-  classes,
-  addImages,
-  subtractImages,
+  direction, // Right or Left
+  data, // allow clickable if data exists
+  activeImage, // current displayed image
+  setActiveImage, // change image
+  classes, // add style
+  addImages, // choose end-point for images that are viewed
+  subtractImages, // decide starting-point for images to begin at
 }) => {
   const addActiveImage = () => {
     if (data) {
