@@ -66,7 +66,9 @@ const ProductInfo = ({ data }) => {
 };
 
 const StorePageOne = ({ fetchedData, clickedImage }) => {
-  let clickedImagePage = Math.floor(clickedImage / 4);
+  let clickedImagePage = !isNaN(clickedImage)
+    ? Math.floor(clickedImage / 4)
+    : 0;
   const [page, setPage] = useState(clickedImagePage);
   let productsToViewDownTo = page ? page * 4 : 0;
   let productsToViewUpTo = productsToViewDownTo + 3;
