@@ -113,8 +113,6 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
     navigate(`/store/${link}`);
   };
 
-  console.log(fetchedPageProducts);
-
   return (
     <div className={classes.productsPage}>
       <div className={classes.imagesContainer}>
@@ -123,7 +121,7 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
             className={classes.imageWrapper}
             key={index}
             ref={(el) => (elementsRef.current[index] = el)}
-            onClick={() => handleNavigate(index)}
+            onClick={() => handleNavigate(index + 4 * page)}
           >
             <img src={image.images[0]} alt="" />
             <div className={classes.imageInfo}>
