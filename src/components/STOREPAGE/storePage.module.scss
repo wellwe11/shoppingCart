@@ -12,6 +12,8 @@
   min-width: 50%;
   max-width: 50%;
 
+  min-height: 620px;
+
   .imagesContainer {
     display: flex;
     justify-content: space-evenly;
@@ -101,6 +103,8 @@
 .productInfo {
   min-width: 50%;
   background-color: white;
+  display: flex;
+  justify-content: center;
 
   .productImagesContainer {
     margin-top: 60px;
@@ -143,6 +147,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    flex-direction: column;
 
     height: 100px;
     width: 400px;
@@ -161,8 +166,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background-color: orange;
+  color: black;
 
   .buttonStyle {
     padding: 10px;

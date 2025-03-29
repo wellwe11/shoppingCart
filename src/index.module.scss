@@ -13,7 +13,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 920px) {
+  html {
+    p {
+      font-size: 14px !important;
+    }
+    span {
+      font-size: 14px;
+    }
+
+    button {
+      font-size: 16px;
+    }
+
+    h2 {
+      font-size: 14px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
   html {
     p {
       font-size: 12px !important;
@@ -31,12 +50,6 @@
     }
   }
 }
-
-/* @media screen and (max-width: 800px) {
-  html {
-    font-size: 10px;
-  }
-} */
 
 * {
   margin: 0;

@@ -37,6 +37,7 @@ const ProductInfo = ({ data }) => {
               activeImage={activeImage}
               setActiveImage={setActiveImage}
               classes={classes.productImageButtons}
+              subtractImages={2}
             />
             <div className={classes.productImage}>
               <img src={fetchedData.images[activeImage]} alt="" />
@@ -50,14 +51,15 @@ const ProductInfo = ({ data }) => {
             />
           </div>
 
-          <div className={classes.productText}>
-            <p style={{ color: "red" }}>
-              {fetchedData.title}
-              {fetchedData.brand}
-              {fetchedData.description}
-              {fetchedData.returnPolicy}
-              {fetchedData.warrantyInformation}
-            </p>
+          <div className={classes.productText} style={{ color: "black" }}>
+            <br></br>
+            <h3>
+              {fetchedData.title} - {fetchedData.brand}
+            </h3>
+            <br></br>
+            <p>{fetchedData.description}</p>
+            <br></br>
+            <h6>{fetchedData.warrantyInformation}</h6>
           </div>
         </div>
       )}
@@ -72,6 +74,8 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
   const [page, setPage] = useState(clickedImagePage);
   let productsToViewDownTo = page ? page * 4 : 0;
   let productsToViewUpTo = productsToViewDownTo + 3;
+
+  const navigate = useNavigate();
 
   // ref for effect below
   const elementsRef = useRef([]);
@@ -108,8 +112,6 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
 
     return () => observer.disconnect();
   }, [fetchedPageProducts]);
-
-  const navigate = useNavigate();
 
   const handleNavigate = (link) => {
     navigate(`/store/${link}`);
@@ -151,15 +153,21 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
         pages={fetchedData.products}
         page={page}
         setPage={setPage}
-        data={fetchedPageProducts}
       />
     </div>
   );
 };
 
-const StorePageButtons = ({ pages, page, setPage, data }) => {
+const StorePageButtons = ({ pages, page, setPage }) => {
   const amountOfPages = Math.floor(pages.length / 4) + 1;
   const startPage = page + 1;
+
+  // a responsice array that will display the amount of pages viewable
+  const data = [];
+
+  for (let i = 0; i < amountOfPages; i++) {
+    data.push(i);
+  }
 
   // add a limit to NavButton so that it functions correctly (it needs data to setpage etc)
 
