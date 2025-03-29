@@ -13,6 +13,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media screen and (max-width: 800px) {
+  html {
+    p {
+      font-size: 12px !important;
+    }
+    span {
+      font-size: 12px;
+    }
+
+    button {
+      font-size: 14px;
+    }
+
+    h2 {
+      font-size: 12px !important;
+    }
+  }
+}
+
+/* @media screen and (max-width: 800px) {
+  html {
+    font-size: 10px;
+  }
+} */
+
 * {
   margin: 0;
   padding: 0;
