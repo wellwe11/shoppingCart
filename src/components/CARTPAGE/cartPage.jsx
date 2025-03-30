@@ -1,5 +1,6 @@
 import classes from "./cartPage.module.scss";
 import { useState, useEffect } from "react";
+import React from "react";
 
 const CartItem = ({
   item,
@@ -9,7 +10,7 @@ const CartItem = ({
   handleDeleteItem,
 }) => {
   return (
-    <div key={index} className={classes.cartImageWrapper}>
+    <div className={classes.cartImageWrapper}>
       <img src={item.images[0]} alt="" />
       <div>
         <button onClick={handleCartItemsPlus}>+</button>
@@ -20,8 +21,8 @@ const CartItem = ({
       </div>
       <p>{item.amount}</p>
       <div>
-        <li>{item.title}</li>
-        <li>{item.price}</li>
+        <li key={1}>{item.title}</li>
+        <li key={2}>{item.price}</li>
       </div>
       <button onClick={handleDeleteItem}>Delete all</button>
     </div>
@@ -91,13 +92,15 @@ const CartItems = ({ data }) => {
     <div className={classes.cartPageImagesWrapper}>
       {arrayDone
         ? itemsArray.map((item, index) => (
-            <CartItem
-              item={item}
-              index={index}
-              handleCartItemsPlus={() => handleCartItemsPlus(item)}
-              handleCartItemsMinus={() => handleCartItemsMinus(item)}
-              handleDeleteItem={() => handleDeleteItem(item)}
-            />
+            <React.Fragment key={index}>
+              <CartItem
+                item={item}
+                index={index}
+                handleCartItemsPlus={() => handleCartItemsPlus(item)}
+                handleCartItemsMinus={() => handleCartItemsMinus(item)}
+                handleDeleteItem={() => handleDeleteItem(item)}
+              />
+            </React.Fragment>
           ))
         : ""}
       <p>{Math.round(totalCost)}</p>
