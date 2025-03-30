@@ -4,7 +4,19 @@ import starImage from "./rating.png";
 import { useNavigate } from "react-router-dom";
 import NavButton from "../SELFMADE_COMPONENTS/NavButton";
 
-const ProductInfo = ({ data }) => {
+const AddToCart = ({ data, setProductsInCart }) => {
+  const handleProducts = (newProducts) => {
+    setProductsInCart((prevProducts) => [...prevProducts, newProducts]);
+  };
+
+  return (
+    <div className={classes.addToCart}>
+      <button onClick={() => handleProducts(data)}>Add to cart</button>
+    </div>
+  );
+};
+
+const ProductInfo = ({ data, setProductsInCart }) => {
   const [fetchedData, setFetchedData] = useState(null);
   const [activeImage, setActiveImage] = useState(0);
 
@@ -60,6 +72,11 @@ const ProductInfo = ({ data }) => {
             <p>{fetchedData.description}</p>
             <br></br>
             <h6>{fetchedData.warrantyInformation}</h6>
+            <br></br>
+            <AddToCart
+              data={fetchedData}
+              setProductsInCart={setProductsInCart}
+            />
           </div>
         </div>
       )}
@@ -192,7 +209,7 @@ const StorePageButtons = ({ pages, page, setPage }) => {
   );
 };
 
-const StorePage = ({ data, clickedImage }) => {
+const StorePage = ({ data, clickedImage, setProductsInCart }) => {
   const [fetchedData, setFetchedData] = useState(data);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -217,7 +234,10 @@ const StorePage = ({ data, clickedImage }) => {
 
   return (
     <div className={classes.storePage}>
-      <ProductInfo data={fetchedData.products[clickedImage]} />
+      <ProductInfo
+        data={fetchedData.products[clickedImage]}
+        setProductsInCart={setProductsInCart}
+      />
       {!loading && (
         <>
           <StorePageOne fetchedData={fetchedData} clickedImage={clickedImage} />

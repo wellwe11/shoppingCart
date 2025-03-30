@@ -23,6 +23,7 @@ const Profile = () => {
   const [dataTwo, setDataTwo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [productsInCart, setProductsInCart] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +57,10 @@ const Profile = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log(productsInCart);
+  }, [productsInCart]);
+
   const { name } = useParams();
 
   const { product } = useParams();
@@ -71,9 +76,13 @@ const Profile = () => {
       <NavBar />
       <div>
         {product ? (
-          <StorePage data={dataTwo} clickedImage={product} />
+          <StorePage
+            data={dataTwo}
+            clickedImage={product}
+            setProductsInCart={setProductsInCart}
+          />
         ) : name ? (
-          <PageToView data={dataTwo} />
+          <PageToView data={dataTwo} cartData={productsInCart} />
         ) : (
           <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}

@@ -1,0 +1,36 @@
+.cartPage {
+  background-color: white;
+
+  .cartPageImagesWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cartImageWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+
+    color: black;
+    list-style: none;
+
+    background-color: gainsboro;
+    border: 20px solid white;
+    flex-wrap: wrap;
+  }
+
+  .cartImageWrapper img {
+    height: 200px;
+  }
+
+  li {
+  }
+
+  p {
+    color: black;
+    margin-left: 500px;
+  }
+}
