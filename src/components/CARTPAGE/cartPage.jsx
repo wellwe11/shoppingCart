@@ -60,6 +60,14 @@ const CartItems = ({ data }) => {
     }
   }, [arrayDone, updateComp]);
 
+  useEffect(() => {
+    if (arrayDone) {
+      itemsArray.map((item) => {
+        item.amount < 1 ? handleDeleteItem(item) : "";
+      });
+    }
+  }, [updateComp]);
+
   const handleCartItemsPlus = (item) => {
     setUpdateComp((prevItem) => prevItem + 1);
     item.amount += 1;
