@@ -1,67 +1,109 @@
 import classes from "./cartPage.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const CartItem = ({ item, index, handleCartItems }) => {
+const CartItem = ({
+  item,
+  index,
+  handleCartItemsPlus,
+  handleCartItemsMinus,
+  handleDeleteItem,
+}) => {
   return (
     <div key={index} className={classes.cartImageWrapper}>
       <img src={item.images[0]} alt="" />
       <div>
-        <button onClick={() => handleCartItems(item)}>+</button>
+        <button onClick={handleCartItemsPlus}>+</button>
         <br></br>
 
         <br></br>
-        <button>-</button>
+        <button onClick={handleCartItemsMinus}>-</button>
       </div>
       <p>{item.amount}</p>
       <div>
         <li>{item.title}</li>
         <li>{item.price}</li>
       </div>
+      <button onClick={handleDeleteItem}>Delete all</button>
     </div>
   );
 };
 
-const CartItems = ({ data, handleCartItems }) => {
-  const itemsArray = [];
+const CartItems = ({ data }) => {
+  const [arrayDone, setArrayDone] = useState(false);
+  const [itemsArray, setItemsArray] = useState(null);
+  const [updateComp, setUpdateComp] = useState(null);
+  const [totalCost, setTotalCost] = useState(0);
 
-  data.forEach((item) => {
+  useEffect(() => {
+    const itemsArray = [];
+    data.forEach((item) => {
+      const indexOfItem = itemsArray.findIndex(
+        (itemToMatch) => itemToMatch.id === item.id
+      );
+
+      if (indexOfItem === -1) {
+        itemsArray.push({ ...item, amount: 1 });
+      } else {
+        itemsArray[indexOfItem].amount += 1;
+      }
+    });
+
+    setArrayDone(true);
+    setItemsArray(itemsArray);
+  }, []);
+
+  useEffect(() => {
+    if (arrayDone) {
+      const amount = itemsArray.map((item) => item.price * item.amount);
+      const reducedAmount = amount.reduce((acc, currVal) => acc + currVal, 0);
+      setTotalCost(Number(reducedAmount));
+    }
+  }, [arrayDone, updateComp]);
+
+  const handleCartItemsPlus = (item) => {
+    setUpdateComp((prevItem) => prevItem + 1);
+    item.amount += 1;
+  };
+
+  const handleCartItemsMinus = (item) => {
+    setUpdateComp((prevItem) => prevItem + 1);
+    item.amount -= 1;
+  };
+
+  const handleDeleteItem = (item) => {
+    setUpdateComp((prevItem) => prevItem + 1);
     const indexOfItem = itemsArray.findIndex(
       (itemToMatch) => itemToMatch.id === item.id
     );
 
-    if (indexOfItem === -1) {
-      itemsArray.push({ ...item, amount: 1 });
-    } else {
-      itemsArray[indexOfItem].amount += 1;
-    }
-  });
+    itemsArray.splice(indexOfItem, 1);
+  };
 
   return (
     <div className={classes.cartPageImagesWrapper}>
-      {itemsArray.map((item, index) => (
-        <CartItem item={item} index={index} handleCartItems={handleCartItems} />
-      ))}
+      {arrayDone
+        ? itemsArray.map((item, index) => (
+            <CartItem
+              item={item}
+              index={index}
+              handleCartItemsPlus={() => handleCartItemsPlus(item)}
+              handleCartItemsMinus={() => handleCartItemsMinus(item)}
+              handleDeleteItem={() => handleDeleteItem(item)}
+            />
+          ))
+        : ""}
+      <p>{Math.round(totalCost)}</p>
     </div>
   );
 };
 
 const CartPage = ({ cartData }) => {
   const [cartItems, setCartItems] = useState(cartData);
-  let cartTotalCost = 0;
-
-  const handleCartItems = (newItem) => {
-    setCartItems((prevItems) => [...prevItems, newItem]);
-  };
-
-  cartItems.map((item) => {
-    cartTotalCost = item.price + cartTotalCost;
-  });
 
   return (
     <div className={classes.cartPage}>
       <h1>Hello, this is the cart</h1>
-      <CartItems data={cartItems} handleCartItems={handleCartItems} />
-      <p>{Math.round(cartTotalCost)}</p>
+      <CartItems data={cartItems} />
     </div>
   );
 };
