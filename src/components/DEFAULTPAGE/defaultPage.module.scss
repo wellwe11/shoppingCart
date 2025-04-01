@@ -414,3 +414,87 @@ html {
 14px = 0.875rem
 
 */
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (max-width: 920px) {
+  html {
+    p {
+      font-size: 14px !important;
+    }
+    span {
+      font-size: 14px;
+    }
+
+    button {
+      font-size: 16px;
+    }
+
+    h2 {
+      font-size: 14px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  html {
+    p {
+      font-size: 12px !important;
+    }
+    span {
+      font-size: 12px;
+    }
+
+    button {
+      font-size: 14px;
+    }
+
+    h2 {
+      font-size: 12px !important;
+    }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 1440px;
+  /*dont align self center*/
+  justify-self: center;
+}
