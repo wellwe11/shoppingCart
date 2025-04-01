@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import classes from "./defaultPage.module.scss";
 import React from "react";
+import "../../index.module.scss";
 
 import { useNavigate } from "react-router-dom";
 import NavButton from "../SELFMADE_COMPONENTS/NavButton";

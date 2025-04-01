@@ -1,6 +1,8 @@
 .navBar {
   background-color: black;
   margin-bottom: 31px;
+  position: relative;
+
   .container {
     position: relative;
     max-width: 1440px;
@@ -154,6 +156,7 @@
   height: 60px;
   width: 100%;
   margin-top: 160px;
+  max-width: 1440px;
 
   background-color: white;
 
@@ -204,7 +207,7 @@
 .menuViewOut {
   position: fixed !important;
   top: 0;
-  left: 0;
+
   opacity: 1;
 
   border-bottom: 1px solid black;
