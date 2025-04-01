@@ -93,9 +93,11 @@ const NavIcons = ({ productsInCart }) => {
           <div className={classes.cartIconSVG}>
             <CartIconSVG />
           </div>
-          <div className={classes.CartIconSvgProductsAmount}>
-            {productsInCart.length}
-          </div>
+          {productsInCart.length > 0 && (
+            <div className={classes.CartIconSvgProductsAmount}>
+              {productsInCart.length}
+            </div>
+          )}
         </button>
       </div>
     </div>
