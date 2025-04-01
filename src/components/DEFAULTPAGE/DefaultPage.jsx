@@ -267,21 +267,9 @@ const PersonalStorySection = () => {
       </div>
       <div className={classes.aboutImagesContainer}>
         <div className={classes.aboutImagesWrapper}>
-          <AboutImage
-            link={aboutImageSport}
-            width={"358px"}
-            text={texts.sportText}
-          />
-          <AboutImage
-            link={aboutImageSitting}
-            width={""}
-            text={texts.sittingText}
-          />
-          <AboutImage
-            link={aboutImageParty}
-            width={"358px"}
-            text={texts.partText}
-          />
+          <AboutImage link={aboutImageSport} text={texts.sportText} />
+          <AboutImage link={aboutImageSitting} text={texts.sittingText} />
+          <AboutImage link={aboutImageParty} text={texts.partText} />
         </div>
       </div>
     </section>
