@@ -223,15 +223,20 @@
     background-color: gainsboro;
   }
 
-  .amountBtn p {
+  .amountBtn input {
     font-size: 14px;
     margin-right: 5px;
-    width: 15px;
+    width: 25px;
+    text-align: center;
+    border: none;
+    background-color: white;
+    color: black;
   }
 }
 
-.addToCart:hover .addToCartBtn {
-  width: 82%;
+.addToCart:hover .addToCartBtn,
+.addToCartBtn:has(+ .amountBtn input:focus) {
+  width: 78%;
 }
 
 .storePageButtons {

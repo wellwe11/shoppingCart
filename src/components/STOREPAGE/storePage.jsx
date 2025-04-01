@@ -31,7 +31,7 @@ const AddToCart = ({ data, setProductsInCart, amount, setAmount }) => {
       </button>
       <div className={classes.amountBtn}>
         <button onClick={handleAmountMinus}>-</button>
-        <p>{amount}</p>
+        <input value={amount} onChange={(e) => setAmount(e.target.value)} />
         <button onClick={handleAmountPlus}>+</button>
       </div>
     </div>
