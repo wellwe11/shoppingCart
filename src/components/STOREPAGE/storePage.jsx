@@ -106,10 +106,6 @@ const StorePageOne = ({ fetchedData, clickedImage }) => {
     setFetchedPageProducts(productPageToView);
   }, [page]);
 
-  useEffect(() => {
-    // console.log(page);
-  }, [page]);
-
   // creates a smooth transition for events to make them look a bit
   // nicer when scrolling
   useEffect(() => {

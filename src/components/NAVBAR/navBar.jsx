@@ -118,7 +118,7 @@ const Logo = ({ ref }) => {
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ productsInCart }) => {
   const elementTarget = useRef();
   const elementTargetTwo = useRef();
   const [navButtonClass, setNavButtonClass] = useState("");

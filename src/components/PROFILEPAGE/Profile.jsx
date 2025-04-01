@@ -57,10 +57,6 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(productsInCart);
-  }, [productsInCart]);
-
   const { name } = useParams();
 
   const { product } = useParams();
@@ -73,16 +69,20 @@ const Profile = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar productsInCart={productsInCart} />
       <div>
         {product ? (
           <StorePage
+            setProductsInCart={setProductsInCart}
             data={dataTwo}
             clickedImage={product}
-            setProductsInCart={setProductsInCart}
           />
         ) : name ? (
-          <PageToView data={dataTwo} cartData={productsInCart} />
+          <PageToView
+            setProductsInCart={setProductsInCart}
+            data={dataTwo}
+            cartData={productsInCart}
+          />
         ) : (
           <DefaultPage data={dataOne} dataTwo={dataTwo} />
         )}
