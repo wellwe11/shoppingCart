@@ -4,8 +4,6 @@ import CartPage from "../CARTPAGE/cartPage";
 import StorePage from "../STOREPAGE/storePage";
 import AboutUsPage from "../ABOUTUSPAGE/aboutUs";
 
-const PEXEL_API_KEY = import.meta.env.VITE_PEXEP_API_KEY;
-
 import classes from "./profileStyles.module.css";
 import { useEffect, useState } from "react";
 
@@ -19,7 +17,6 @@ const pages = {
 };
 
 const Profile = () => {
-  const [dataOne, setDataOne] = useState(null);
   const [dataTwo, setDataTwo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -29,22 +26,12 @@ const Profile = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const [fetchedOne, fetchedTwo] = await Promise.all([
-          fetch(
-            "https://api.pexels.com/v1/search?query=smartwatch&per_page=20",
-            {
-              headers: {
-                Authorization: PEXEL_API_KEY,
-              },
-            }
-          ).then((response) => response.json()),
-
+        const fetchedTwo = await Promise.all([
           fetch("https://dummyjson.com/products/search?q=watch").then(
             (response) => response.json()
           ),
         ]);
 
-        setDataOne(fetchedOne);
         setDataTwo(fetchedTwo);
       } catch (error) {
         console.log("Failed to fetch data", error);
@@ -80,11 +67,11 @@ const Profile = () => {
         ) : name ? (
           <PageToView
             setProductsInCart={setProductsInCart}
-            data={dataTwo}
+            dataTwo={dataTwo}
             cartData={productsInCart}
           />
         ) : (
-          <DefaultPage data={dataOne} dataTwo={dataTwo} />
+          <DefaultPage dataTwo={dataTwo} />
         )}
       </div>
       <Footer />

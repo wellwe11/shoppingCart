@@ -11,6 +11,12 @@ import aboutImageSport from "./aboutImageSport.webp";
 import aboutImageSitting from "./aboutImageSitting.webp";
 import aboutImageParty from "./aboutImageParty.webp";
 
+import imageOne from "./bigImageOne.webp";
+import imageTwo from "./bigImageTwo.webp";
+import imageThree from "./bigImageThree.webp";
+import imageFour from "./bigImageFour.jpeg";
+import imageFive from "./bigImageFive.webp";
+
 const PictureSliderSmall = ({ fetchedData }) => {
   // set active image to be length of visible images
   // adjust this accordingly to make sure that the iamges are always visible
@@ -23,7 +29,7 @@ const PictureSliderSmall = ({ fetchedData }) => {
   const [elementWidth, setElementWidth] = useState(null);
 
   useEffect(() => {
-    setData(fetchedData.products);
+    setData(fetchedData[0].products);
   }, [fetchedData]);
 
   useEffect(() => {
@@ -104,34 +110,17 @@ const PictureSliderSmall = ({ fetchedData }) => {
   );
 };
 
-const PictureSliderBig = ({ fetchedData }) => {
+const PictureSliderBig = () => {
   const [activeImage, setActiveImage] = useState(1);
   const [mouseHoverSlider, setMouseHoverSlider] = useState(false);
-  const [dataFetched, setDataFetched] = useState(false);
-  const [data, setData] = useState(null);
 
-  const sliderTexts = [
-    "A smartwatch isn't just about time. It's about making the most of it",
-    "Track your goals, stay connected, and redefine what's possible",
-    "Smart technology, smarter living. Wear the future on your wrist",
-    "Your journey to a healthier, more connected life starts with a smartwatch",
-    "More than a watch. Your personal coach, assistant, and motivator",
-    "Stay ahead, stay active, stay in control. Right from your wrist",
-  ];
-
-  useEffect(() => {
-    const fetchedPhotos = fetchedData.photos.filter(
-      (img, index) => index > 10 && index < 17 && img.width > 4000
-    );
-
-    setData(fetchedPhotos);
-  }, [fetchedData]);
-
-  useEffect(() => {
-    if (data !== null) {
-      setDataFetched(true);
-    }
-  }, [data]);
+  const bigImages = {
+    imageOne: imageOne,
+    imageTwo: imageTwo,
+    imageThree: imageThree,
+    imageFour: imageFour,
+    imageFive: imageFive,
+  };
 
   const handleMouseHoverSliderTrue = () => {
     setMouseHoverSlider(true);
@@ -144,7 +133,7 @@ const PictureSliderBig = ({ fetchedData }) => {
   useEffect(() => {
     if (!mouseHoverSlider) {
       const timer = setTimeout(() => {
-        if (activeImage < data.length - 1) {
+        if (activeImage < bigImages.length - 1) {
           setActiveImage((prevImg) => prevImg + 1);
         } else {
           setActiveImage(0);
@@ -160,7 +149,7 @@ const PictureSliderBig = ({ fetchedData }) => {
       <div className={classes.pictureSliderContainer}>
         <NavButton
           direction="Left"
-          data={data}
+          data={Object.keys(bigImages)}
           activeImage={activeImage}
           setActiveImage={setActiveImage}
           classes={classes.buttonClicker}
@@ -170,25 +159,24 @@ const PictureSliderBig = ({ fetchedData }) => {
           onMouseLeave={handleMouseHoverSliderFalse}
           onMouseEnter={handleMouseHoverSliderTrue}
         >
-          {dataFetched &&
-            data.map((img, index) => (
-              <React.Fragment key={index}>
-                <div
-                  className={`${classes.pictureSliderImage} ${
-                    index === activeImage
-                      ? classes.pictureSliderImageInView
-                      : classes.pictureSliderImageOutView
-                  }`}
-                  key={index}
-                >
-                  <img src={img.src.landscape} alt={img.src.alt} />
-                </div>
-              </React.Fragment>
-            ))}
+          {Object.values(bigImages).map((img, index) => (
+            <React.Fragment key={index}>
+              <div
+                className={`${classes.pictureSliderImage} ${
+                  index === activeImage
+                    ? classes.pictureSliderImageInView
+                    : classes.pictureSliderImageOutView
+                }`}
+                key={index}
+              >
+                <img src={img} alt={img} />
+              </div>
+            </React.Fragment>
+          ))}
         </div>
         <NavButton
           direction="Right"
-          data={data}
+          data={Object.keys(bigImages)}
           activeImage={activeImage}
           setActiveImage={setActiveImage}
           classes={classes.buttonClicker}
@@ -385,10 +373,10 @@ const ServiceInformation = () => {
   );
 };
 
-const DefaultPage = ({ data, dataTwo }) => {
+const DefaultPage = ({ dataTwo }) => {
   return (
     <div>
-      <PictureSliderBig fetchedData={data} />
+      <PictureSliderBig />
       <PersonalStorySection />
       <ProductInformationSection />
       <PictureSliderSmall fetchedData={dataTwo} />
