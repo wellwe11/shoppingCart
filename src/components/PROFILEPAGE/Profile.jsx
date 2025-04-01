@@ -4,6 +4,7 @@ import CartPage from "../CARTPAGE/cartPage";
 import StorePage from "../STOREPAGE/storePage";
 import AboutUsPage from "../ABOUTUSPAGE/aboutUs";
 
+import "../../index.module.scss";
 import classes from "./profileStyles.module.css";
 import { useEffect, useState } from "react";
 
