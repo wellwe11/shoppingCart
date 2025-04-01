@@ -68,6 +68,7 @@ const Profile = () => {
           <PageToView
             setProductsInCart={setProductsInCart}
             dataTwo={dataTwo}
+            data={dataTwo}
             cartData={productsInCart}
           />
         ) : (

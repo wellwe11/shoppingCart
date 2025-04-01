@@ -232,21 +232,21 @@ const StorePageButtons = ({ pages, page, setPage }) => {
 };
 
 const StorePage = ({ data, clickedImage, setProductsInCart }) => {
-  const [fetchedData, setFetchedData] = useState(data);
+  const [fetchedData, setFetchedData] = useState(data[0]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setFetchedData(data);
+    setFetchedData(data[0]);
   }, [data]);
 
   useEffect(() => {
-    if (data && data.products && data.products.length > 0) {
+    if (data && data[0].products && data[0].products.length > 0) {
       setError(false);
       setLoading(false);
     } else {
       setError(true);
-      console.log("ERROR, FETCHED DATA:", fetchedData, "DATA:", data);
+      console.log("ERROR, FETCHED DATA:", fetchedData, "DATA:", data[0]);
     }
   }, [data]);
 
