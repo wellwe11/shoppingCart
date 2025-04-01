@@ -86,7 +86,9 @@ const CartItems = ({ data, setProductsInCart }) => {
       (itemToMatch) => itemToMatch.id === item.id
     );
 
-    data.splice(indexOfItem, 1);
+    setProductsInCart((prevItems) =>
+      prevItems.filter((_, i) => i !== indexOfItem)
+    );
   };
 
   const handleDeleteItem = (item) => {

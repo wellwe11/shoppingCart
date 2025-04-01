@@ -43,7 +43,7 @@ const NavButtons = ({ classNameView }) => {
   );
 };
 
-const NavIcons = () => {
+const NavIcons = ({ productsInCart }) => {
   const [searchHover, setSearchHover] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
 
@@ -93,13 +93,16 @@ const NavIcons = () => {
           <div className={classes.cartIconSVG}>
             <CartIconSVG />
           </div>
+          <div className={classes.CartIconSvgProductsAmount}>
+            {productsInCart.length}
+          </div>
         </button>
       </div>
     </div>
   );
 };
 
-const Logo = ({ ref }) => {
+const Logo = ({ ref, productsInCart }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (link) => {
@@ -107,7 +110,7 @@ const Logo = ({ ref }) => {
   };
   return (
     <div className={classes.logo} ref={ref}>
-      <NavIcons />
+      <NavIcons productsInCart={productsInCart} />
       <div className={classes.container}>
         <div className={classes.wrapper}>
           <h1 onClick={() => handleNavigate("./")}>Ryander</h1>
@@ -204,7 +207,7 @@ const NavBar = ({ productsInCart }) => {
   return (
     <div className={classes.navBar}>
       <div className={classes.container}>
-        <Logo ref={elementTarget} />
+        <Logo ref={elementTarget} productsInCart={productsInCart} />
         <NavButtons classNameView={navButtonClass} />
       </div>
       <div
@@ -216,6 +219,7 @@ const NavBar = ({ productsInCart }) => {
           marginTop: "300px",
         }}
       ></div>
+      <div style={{ color: "white" }}>hello</div>
     </div>
   );
 };
