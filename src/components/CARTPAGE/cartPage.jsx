@@ -10,20 +10,22 @@ const CartItem = ({
 }) => {
   return (
     <div className={classes.cartImageWrapper}>
-      <img src={item.images[0]} alt="" />
-      <div>
+      <div className={classes.cartImageAndInfo}>
+        <li key={1}>{item.title}</li>
+        <img src={item.images[0]} alt="" />
+        <li key={2}>{item.price}</li>
+      </div>
+      <div className={classes.cartImagePlusMinus}>
         <button onClick={handleCartItemsPlus}>+</button>
         <br></br>
+        <p>{item.amount}</p>
 
         <br></br>
         <button onClick={handleCartItemsMinus}>-</button>
       </div>
-      <p>{item.amount}</p>
-      <div>
-        <li key={1}>{item.title}</li>
-        <li key={2}>{item.price}</li>
+      <div className={classes.deleteAllButton}>
+        <button onClick={handleDeleteItem}>X</button>
       </div>
-      <button onClick={handleDeleteItem}>Delete all</button>
     </div>
   );
 };
@@ -96,11 +98,9 @@ const CartItems = ({ data, setProductsInCart }) => {
     const indexOfItem = itemsArray.findIndex(
       (itemToMatch) => itemToMatch.id === item.id
     );
-
     itemsArray.splice(indexOfItem, 1);
 
-    const updatedData = data.filter((arrayItem) => arrayItem.id !== item.id);
-    setProductsInCart(updatedData);
+    setProductsInCart(data.filter((arrayItem) => arrayItem.id !== item.id));
   };
 
   return (
@@ -118,7 +118,9 @@ const CartItems = ({ data, setProductsInCart }) => {
             </React.Fragment>
           ))
         : ""}
-      <p>{Math.round(totalCost)}</p>
+      <p className={classes.totalCostText}>
+        Total cost: {Math.round(totalCost)}
+      </p>
     </div>
   );
 };

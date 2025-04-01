@@ -1,36 +1,88 @@
 .cartPage {
   background-color: white;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
 
   .cartPageImagesWrapper {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 200px;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .cartImageWrapper {
+    display: flex;
+    align-items: center;
+
+    color: black;
+    list-style: none;
+
+    background-color: rgba(220, 220, 220, 0.338);
+    border: 20px solid white;
+    padding: 10px;
+    border-radius: 30px;
+    position: relative;
+
+    .deleteAllButton {
+      position: absolute;
+      display: flex;
+      right: 0;
+      top: 0;
+
+      border-left: 5px solid gainsboro;
+      border-bottom: 2.5px solid gainsboro;
+      border-right: 5px solid gainsboro;
+      background-color: gainsboro;
+    }
+
+    .deleteAllButton button {
+    }
+
+    .deleteAllButton:hover {
+      background-color: gray;
+      border-left: 5px solid gray;
+      border-bottom: 2.5px solid gray;
+      border-right: 5px solid gray;
+    }
+  }
+
+  .cartImageAndInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  .cartImageWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 60%;
-
-    color: black;
-    list-style: none;
-
-    background-color: gainsboro;
-    border: 20px solid white;
-    flex-wrap: wrap;
-  }
-
   .cartImageWrapper img {
     height: 200px;
   }
 
-  li {
+  .cartImagePlusMinus {
+    display: flex;
+    font-size: 24px;
+    width: 100px;
+    color: gray;
+    position: relative;
+
+    p {
+      color: black;
+      margin-top: 20px;
+    }
   }
 
-  p {
+  .cartImagePlusMinus button {
+    padding: 20px;
+  }
+
+  .cartImagePlusMinus button:hover {
     color: black;
-    margin-left: 500px;
+  }
+
+  .totalCostText {
+    color: black;
+    margin-left: 20px;
   }
 }
