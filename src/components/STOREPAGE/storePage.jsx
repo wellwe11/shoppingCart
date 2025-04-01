@@ -4,14 +4,36 @@ import starImage from "./rating.png";
 import { useNavigate } from "react-router-dom";
 import NavButton from "../SELFMADE_COMPONENTS/NavButton";
 
-const AddToCart = ({ data, setProductsInCart }) => {
+const AddToCart = ({ data, setProductsInCart, amount, setAmount }) => {
   const handleProducts = (newProducts) => {
-    setProductsInCart((prevProducts) => [...prevProducts, newProducts]);
+    for (let i = 0; i < amount; i++) {
+      setProductsInCart((prevProducts) => [...prevProducts, newProducts]);
+    }
+  };
+
+  const handleAmountPlus = () => {
+    setAmount((prevAmount) => prevAmount + 1);
+  };
+
+  const handleAmountMinus = () => {
+    if (amount > 1) {
+      setAmount((prevAmount) => prevAmount - 1);
+    }
   };
 
   return (
     <div className={classes.addToCart}>
-      <button onClick={() => handleProducts(data)}>Add to cart</button>
+      <button
+        className={classes.addToCartBtn}
+        onClick={() => handleProducts(data)}
+      >
+        Add to cart
+      </button>
+      <div className={classes.amountBtn}>
+        <button onClick={handleAmountMinus}>-</button>
+        <p>{amount}</p>
+        <button onClick={handleAmountPlus}>+</button>
+      </div>
     </div>
   );
 };
@@ -19,9 +41,11 @@ const AddToCart = ({ data, setProductsInCart }) => {
 const ProductInfo = ({ data, setProductsInCart }) => {
   const [fetchedData, setFetchedData] = useState(null);
   const [activeImage, setActiveImage] = useState(0);
+  const [amount, setAmount] = useState(1);
 
   useEffect(() => {
     setFetchedData(data);
+    setAmount(1);
   }, [data]);
 
   return (
@@ -76,6 +100,8 @@ const ProductInfo = ({ data, setProductsInCart }) => {
             <AddToCart
               data={fetchedData}
               setProductsInCart={setProductsInCart}
+              amount={amount}
+              setAmount={setAmount}
             />
           </div>
         </div>
