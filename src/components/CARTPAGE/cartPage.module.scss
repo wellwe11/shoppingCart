@@ -69,12 +69,10 @@
 
     p {
       color: black;
-      margin-top: 20px;
     }
   }
 
   .cartImagePlusMinus button {
-    padding: 20px;
   }
 
   .cartImagePlusMinus button:hover {
@@ -84,5 +82,22 @@
   .totalCostText {
     color: black;
     margin-left: 20px;
+  }
+
+  .orderButton {
+    background-color: black;
+    width: 150px;
+    height: 50px;
+    margin-top: 50px;
+  }
+
+  button {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  button:hover {
+    background-color: gray;
   }
 }

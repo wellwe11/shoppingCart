@@ -121,6 +121,9 @@ const CartItems = ({ data, setProductsInCart }) => {
       <p className={classes.totalCostText}>
         Total cost: {Math.round(totalCost)}
       </p>
+      <div className={classes.orderButton}>
+        <button>Order</button>
+      </div>
     </div>
   );
 };
